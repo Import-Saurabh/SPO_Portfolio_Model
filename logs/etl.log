@@ -1,0 +1,1996 @@
+2025-11-21 15:38:17,116 INFO etl.fetch_price_history - Starting fetch_price_history ETL. Universe file: Data\universe\nifty500.txt
+2025-11-21 15:38:17,136 INFO etl.fetch_price_history - Read 500 tickers from universe file
+2025-11-21 15:38:19,219 ERROR etl.fetch_price_history - ETL failed: (pymysql.err.OperationalError) (2003, "Can't connect to MySQL server on '127.0.0.1' ([WinError 10061] No connection could be made because the target machine actively refused it)")
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\connections.py", line 661, in connect
+    sock = socket.create_connection(
+  File "C:\Program Files\Python310\lib\socket.py", line 845, in create_connection
+    raise err
+  File "C:\Program Files\Python310\lib\socket.py", line 833, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 3301, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 711, in checkout
+    rec = pool._do_get()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\impl.py", line 177, in _do_get
+    with util.safe_reraise():
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\impl.py", line 175, in _do_get
+    return self._create_connection()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 388, in _create_connection
+    return _ConnectionRecord(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 673, in __init__
+    self.__connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\default.py", line 629, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\connections.py", line 365, in __init__
+    self.connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\connections.py", line 723, in connect
+    raise exc
+pymysql.err.OperationalError: (2003, "Can't connect to MySQL server on '127.0.0.1' ([WinError 10061] No connection could be made because the target machine actively refused it)")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\hp\Downloads\SPO-Portfolio\ETL\Pipelines\fetch_price_history.py", line 184, in main
+    mapping = ensure_companies(session, symbols_payload)
+  File "c:\Users\hp\Downloads\SPO-Portfolio\etl\utils\db.py", line 19, in ensure_companies
+    res = session.execute(stmt).scalar_one_or_none()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 2351, in execute
+    return self._execute_internal(
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 2239, in _execute_internal
+    conn = self._connection_for_bind(bind)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 2108, in _connection_for_bind
+    return trans._connection_for_bind(engine, execution_options)
+  File "<string>", line 2, in _connection_for_bind
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 1187, in _connection_for_bind
+    conn = bind.connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 3277, in connect
+    return self._connection_cls(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 2440, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 3301, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 711, in checkout
+    rec = pool._do_get()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\impl.py", line 177, in _do_get
+    with util.safe_reraise():
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\impl.py", line 175, in _do_get
+    return self._create_connection()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 388, in _create_connection
+    return _ConnectionRecord(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 673, in __init__
+    self.__connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\default.py", line 629, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\connections.py", line 365, in __init__
+    self.connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\connections.py", line 723, in connect
+    raise exc
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (2003, "Can't connect to MySQL server on '127.0.0.1' ([WinError 10061] No connection could be made because the target machine actively refused it)")
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-11-21 15:38:21,396 ERROR etl.fetch_price_history - Failed to write etl_runs record
+Traceback (most recent call last):
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\connections.py", line 661, in connect
+    sock = socket.create_connection(
+  File "C:\Program Files\Python310\lib\socket.py", line 845, in create_connection
+    raise err
+  File "C:\Program Files\Python310\lib\socket.py", line 833, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 3301, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 711, in checkout
+    rec = pool._do_get()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\impl.py", line 177, in _do_get
+    with util.safe_reraise():
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\impl.py", line 175, in _do_get
+    return self._create_connection()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 388, in _create_connection
+    return _ConnectionRecord(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 673, in __init__
+    self.__connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\default.py", line 629, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\connections.py", line 365, in __init__
+    self.connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\connections.py", line 723, in connect
+    raise exc
+pymysql.err.OperationalError: (2003, "Can't connect to MySQL server on '127.0.0.1' ([WinError 10061] No connection could be made because the target machine actively refused it)")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\hp\Downloads\SPO-Portfolio\ETL\Pipelines\fetch_price_history.py", line 184, in main
+    mapping = ensure_companies(session, symbols_payload)
+  File "c:\Users\hp\Downloads\SPO-Portfolio\etl\utils\db.py", line 19, in ensure_companies
+    res = session.execute(stmt).scalar_one_or_none()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 2351, in execute
+    return self._execute_internal(
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 2239, in _execute_internal
+    conn = self._connection_for_bind(bind)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 2108, in _connection_for_bind
+    return trans._connection_for_bind(engine, execution_options)
+  File "<string>", line 2, in _connection_for_bind
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 1187, in _connection_for_bind
+    conn = bind.connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 3277, in connect
+    return self._connection_cls(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 2440, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 3301, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 711, in checkout
+    rec = pool._do_get()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\impl.py", line 177, in _do_get
+    with util.safe_reraise():
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\impl.py", line 175, in _do_get
+    return self._create_connection()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 388, in _create_connection
+    return _ConnectionRecord(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 673, in __init__
+    self.__connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\default.py", line 629, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\connections.py", line 365, in __init__
+    self.connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\connections.py", line 723, in connect
+    raise exc
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (2003, "Can't connect to MySQL server on '127.0.0.1' ([WinError 10061] No connection could be made because the target machine actively refused it)")
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\connections.py", line 661, in connect
+    sock = socket.create_connection(
+  File "C:\Program Files\Python310\lib\socket.py", line 845, in create_connection
+    raise err
+  File "C:\Program Files\Python310\lib\socket.py", line 833, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 3301, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 711, in checkout
+    rec = pool._do_get()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\impl.py", line 177, in _do_get
+    with util.safe_reraise():
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\impl.py", line 175, in _do_get
+    return self._create_connection()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 388, in _create_connection
+    return _ConnectionRecord(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 673, in __init__
+    self.__connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\default.py", line 629, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\connections.py", line 365, in __init__
+    self.connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\connections.py", line 723, in connect
+    raise exc
+pymysql.err.OperationalError: (2003, "Can't connect to MySQL server on '127.0.0.1' ([WinError 10061] No connection could be made because the target machine actively refused it)")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\hp\Downloads\SPO-Portfolio\ETL\Pipelines\fetch_price_history.py", line 200, in main
+    log_etl_run(session, pipeline_name="fetch_price_history", status="FAILED", error_message=str(e), started_at=started_at, ended_at=datetime.datetime.utcnow())
+  File "c:\Users\hp\Downloads\SPO-Portfolio\etl\utils\db.py", line 45, in log_etl_run
+    session.commit()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 2030, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 1311, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 1286, in _prepare_impl
+    self.session.flush()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 4331, in flush
+    self._flush(objects)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 4466, in _flush
+    with util.safe_reraise():
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 4427, in _flush
+    flush_context.execute()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\persistence.py", line 60, in save_obj
+    for (
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\persistence.py", line 223, in _organize_states_for_save
+    for state, dict_, mapper, connection in _connections_for_states(
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\persistence.py", line 1759, in _connections_for_states
+    connection = uowtransaction.transaction.connection(base_mapper)
+  File "<string>", line 2, in connection
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 1037, in connection
+    return self._connection_for_bind(bind, execution_options)
+  File "<string>", line 2, in _connection_for_bind
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 1173, in _connection_for_bind
+    conn = self._parent._connection_for_bind(
+  File "<string>", line 2, in _connection_for_bind
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 1187, in _connection_for_bind
+    conn = bind.connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 3277, in connect
+    return self._connection_cls(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 2440, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 3301, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 711, in checkout
+    rec = pool._do_get()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\impl.py", line 177, in _do_get
+    with util.safe_reraise():
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\impl.py", line 175, in _do_get
+    return self._create_connection()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 388, in _create_connection
+    return _ConnectionRecord(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 673, in __init__
+    self.__connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\default.py", line 629, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\connections.py", line 365, in __init__
+    self.connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\connections.py", line 723, in connect
+    raise exc
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (2003, "Can't connect to MySQL server on '127.0.0.1' ([WinError 10061] No connection could be made because the target machine actively refused it)")
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-11-21 15:40:31,316 INFO etl.fetch_price_history - Starting fetch_price_history ETL. Universe file: Data\universe\nifty500.txt
+2025-11-21 15:40:31,317 INFO etl.fetch_price_history - Read 500 tickers from universe file
+2025-11-21 15:40:33,368 ERROR etl.fetch_price_history - ETL failed: (pymysql.err.OperationalError) (2003, "Can't connect to MySQL server on '127.0.0.1' ([WinError 10061] No connection could be made because the target machine actively refused it)")
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\connections.py", line 661, in connect
+    sock = socket.create_connection(
+  File "C:\Program Files\Python310\lib\socket.py", line 845, in create_connection
+    raise err
+  File "C:\Program Files\Python310\lib\socket.py", line 833, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 3301, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 711, in checkout
+    rec = pool._do_get()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\impl.py", line 177, in _do_get
+    with util.safe_reraise():
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\impl.py", line 175, in _do_get
+    return self._create_connection()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 388, in _create_connection
+    return _ConnectionRecord(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 673, in __init__
+    self.__connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\default.py", line 629, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\connections.py", line 365, in __init__
+    self.connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\connections.py", line 723, in connect
+    raise exc
+pymysql.err.OperationalError: (2003, "Can't connect to MySQL server on '127.0.0.1' ([WinError 10061] No connection could be made because the target machine actively refused it)")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\hp\Downloads\SPO-Portfolio\etl\pipelines\fetch_price_history.py", line 184, in main
+    mapping = ensure_companies(session, symbols_payload)
+  File "C:\Users\hp\Downloads\SPO-Portfolio\etl\utils\db.py", line 19, in ensure_companies
+    res = session.execute(stmt).scalar_one_or_none()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 2351, in execute
+    return self._execute_internal(
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 2239, in _execute_internal
+    conn = self._connection_for_bind(bind)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 2108, in _connection_for_bind
+    return trans._connection_for_bind(engine, execution_options)
+  File "<string>", line 2, in _connection_for_bind
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 1187, in _connection_for_bind
+    conn = bind.connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 3277, in connect
+    return self._connection_cls(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 2440, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 3301, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 711, in checkout
+    rec = pool._do_get()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\impl.py", line 177, in _do_get
+    with util.safe_reraise():
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\impl.py", line 175, in _do_get
+    return self._create_connection()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 388, in _create_connection
+    return _ConnectionRecord(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 673, in __init__
+    self.__connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\default.py", line 629, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\connections.py", line 365, in __init__
+    self.connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\connections.py", line 723, in connect
+    raise exc
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (2003, "Can't connect to MySQL server on '127.0.0.1' ([WinError 10061] No connection could be made because the target machine actively refused it)")
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-11-21 15:40:35,439 ERROR etl.fetch_price_history - Failed to write etl_runs record
+Traceback (most recent call last):
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\connections.py", line 661, in connect
+    sock = socket.create_connection(
+  File "C:\Program Files\Python310\lib\socket.py", line 845, in create_connection
+    raise err
+  File "C:\Program Files\Python310\lib\socket.py", line 833, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 3301, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 711, in checkout
+    rec = pool._do_get()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\impl.py", line 177, in _do_get
+    with util.safe_reraise():
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\impl.py", line 175, in _do_get
+    return self._create_connection()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 388, in _create_connection
+    return _ConnectionRecord(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 673, in __init__
+    self.__connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\default.py", line 629, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\connections.py", line 365, in __init__
+    self.connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\connections.py", line 723, in connect
+    raise exc
+pymysql.err.OperationalError: (2003, "Can't connect to MySQL server on '127.0.0.1' ([WinError 10061] No connection could be made because the target machine actively refused it)")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\hp\Downloads\SPO-Portfolio\etl\pipelines\fetch_price_history.py", line 184, in main
+    mapping = ensure_companies(session, symbols_payload)
+  File "C:\Users\hp\Downloads\SPO-Portfolio\etl\utils\db.py", line 19, in ensure_companies
+    res = session.execute(stmt).scalar_one_or_none()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 2351, in execute
+    return self._execute_internal(
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 2239, in _execute_internal
+    conn = self._connection_for_bind(bind)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 2108, in _connection_for_bind
+    return trans._connection_for_bind(engine, execution_options)
+  File "<string>", line 2, in _connection_for_bind
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 1187, in _connection_for_bind
+    conn = bind.connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 3277, in connect
+    return self._connection_cls(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 2440, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 3301, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 711, in checkout
+    rec = pool._do_get()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\impl.py", line 177, in _do_get
+    with util.safe_reraise():
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\impl.py", line 175, in _do_get
+    return self._create_connection()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 388, in _create_connection
+    return _ConnectionRecord(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 673, in __init__
+    self.__connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\default.py", line 629, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\connections.py", line 365, in __init__
+    self.connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\connections.py", line 723, in connect
+    raise exc
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (2003, "Can't connect to MySQL server on '127.0.0.1' ([WinError 10061] No connection could be made because the target machine actively refused it)")
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\connections.py", line 661, in connect
+    sock = socket.create_connection(
+  File "C:\Program Files\Python310\lib\socket.py", line 845, in create_connection
+    raise err
+  File "C:\Program Files\Python310\lib\socket.py", line 833, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 3301, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 711, in checkout
+    rec = pool._do_get()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\impl.py", line 177, in _do_get
+    with util.safe_reraise():
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\impl.py", line 175, in _do_get
+    return self._create_connection()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 388, in _create_connection
+    return _ConnectionRecord(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 673, in __init__
+    self.__connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\default.py", line 629, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\connections.py", line 365, in __init__
+    self.connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\connections.py", line 723, in connect
+    raise exc
+pymysql.err.OperationalError: (2003, "Can't connect to MySQL server on '127.0.0.1' ([WinError 10061] No connection could be made because the target machine actively refused it)")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\hp\Downloads\SPO-Portfolio\etl\pipelines\fetch_price_history.py", line 200, in main
+    log_etl_run(session, pipeline_name="fetch_price_history", status="FAILED", error_message=str(e), started_at=started_at, ended_at=datetime.datetime.utcnow())
+  File "C:\Users\hp\Downloads\SPO-Portfolio\etl\utils\db.py", line 45, in log_etl_run
+    session.commit()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 2030, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 1311, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 1286, in _prepare_impl
+    self.session.flush()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 4331, in flush
+    self._flush(objects)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 4466, in _flush
+    with util.safe_reraise():
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 4427, in _flush
+    flush_context.execute()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\persistence.py", line 60, in save_obj
+    for (
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\persistence.py", line 223, in _organize_states_for_save
+    for state, dict_, mapper, connection in _connections_for_states(
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\persistence.py", line 1759, in _connections_for_states
+    connection = uowtransaction.transaction.connection(base_mapper)
+  File "<string>", line 2, in connection
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 1037, in connection
+    return self._connection_for_bind(bind, execution_options)
+  File "<string>", line 2, in _connection_for_bind
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 1173, in _connection_for_bind
+    conn = self._parent._connection_for_bind(
+  File "<string>", line 2, in _connection_for_bind
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 1187, in _connection_for_bind
+    conn = bind.connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 3277, in connect
+    return self._connection_cls(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 2440, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 3301, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 711, in checkout
+    rec = pool._do_get()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\impl.py", line 177, in _do_get
+    with util.safe_reraise():
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\impl.py", line 175, in _do_get
+    return self._create_connection()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 388, in _create_connection
+    return _ConnectionRecord(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 673, in __init__
+    self.__connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\default.py", line 629, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\connections.py", line 365, in __init__
+    self.connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\connections.py", line 723, in connect
+    raise exc
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (2003, "Can't connect to MySQL server on '127.0.0.1' ([WinError 10061] No connection could be made because the target machine actively refused it)")
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-11-21 15:45:58,543 INFO etl.fetch_price_history - Starting fetch_price_history ETL. Universe file: Data\universe\nifty500.txt
+2025-11-21 15:45:58,543 INFO etl.fetch_price_history - Read 500 tickers from universe file
+2025-11-21 15:45:58,559 ERROR etl.fetch_price_history - ETL failed: 'cryptography' package is required for sha256_password or caching_sha2_password auth methods
+Traceback (most recent call last):
+  File "C:\Users\hp\Downloads\SPO-Portfolio\etl\pipelines\fetch_price_history.py", line 184, in main
+    mapping = ensure_companies(session, symbols_payload)
+  File "C:\Users\hp\Downloads\SPO-Portfolio\etl\utils\db.py", line 19, in ensure_companies
+    res = session.execute(stmt).scalar_one_or_none()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 2351, in execute
+    return self._execute_internal(
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 2239, in _execute_internal
+    conn = self._connection_for_bind(bind)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 2108, in _connection_for_bind
+    return trans._connection_for_bind(engine, execution_options)
+  File "<string>", line 2, in _connection_for_bind
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 1187, in _connection_for_bind
+    conn = bind.connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 3277, in connect
+    return self._connection_cls(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 3301, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 711, in checkout
+    rec = pool._do_get()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\impl.py", line 177, in _do_get
+    with util.safe_reraise():
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\impl.py", line 175, in _do_get
+    return self._create_connection()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 388, in _create_connection
+    return _ConnectionRecord(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 673, in __init__
+    self.__connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\default.py", line 629, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\connections.py", line 365, in __init__
+    self.connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\connections.py", line 681, in connect
+    self._request_authentication()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\connections.py", line 980, in _request_authentication
+    auth_packet = _auth.caching_sha2_password_auth(self, auth_packet)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\_auth.py", line 271, in caching_sha2_password_auth
+    data = sha2_rsa_encrypt(conn.password, conn.salt, conn.server_public_key)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\_auth.py", line 144, in sha2_rsa_encrypt
+    raise RuntimeError(
+RuntimeError: 'cryptography' package is required for sha256_password or caching_sha2_password auth methods
+2025-11-21 15:45:58,626 ERROR etl.fetch_price_history - Failed to write etl_runs record
+Traceback (most recent call last):
+  File "C:\Users\hp\Downloads\SPO-Portfolio\etl\pipelines\fetch_price_history.py", line 184, in main
+    mapping = ensure_companies(session, symbols_payload)
+  File "C:\Users\hp\Downloads\SPO-Portfolio\etl\utils\db.py", line 19, in ensure_companies
+    res = session.execute(stmt).scalar_one_or_none()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 2351, in execute
+    return self._execute_internal(
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 2239, in _execute_internal
+    conn = self._connection_for_bind(bind)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 2108, in _connection_for_bind
+    return trans._connection_for_bind(engine, execution_options)
+  File "<string>", line 2, in _connection_for_bind
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 1187, in _connection_for_bind
+    conn = bind.connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 3277, in connect
+    return self._connection_cls(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 3301, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 711, in checkout
+    rec = pool._do_get()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\impl.py", line 177, in _do_get
+    with util.safe_reraise():
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\impl.py", line 175, in _do_get
+    return self._create_connection()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 388, in _create_connection
+    return _ConnectionRecord(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 673, in __init__
+    self.__connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\default.py", line 629, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\connections.py", line 365, in __init__
+    self.connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\connections.py", line 681, in connect
+    self._request_authentication()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\connections.py", line 980, in _request_authentication
+    auth_packet = _auth.caching_sha2_password_auth(self, auth_packet)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\_auth.py", line 271, in caching_sha2_password_auth
+    data = sha2_rsa_encrypt(conn.password, conn.salt, conn.server_public_key)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\_auth.py", line 144, in sha2_rsa_encrypt
+    raise RuntimeError(
+RuntimeError: 'cryptography' package is required for sha256_password or caching_sha2_password auth methods
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\hp\Downloads\SPO-Portfolio\etl\pipelines\fetch_price_history.py", line 200, in main
+    log_etl_run(session, pipeline_name="fetch_price_history", status="FAILED", error_message=str(e), started_at=started_at, ended_at=datetime.datetime.utcnow())
+  File "C:\Users\hp\Downloads\SPO-Portfolio\etl\utils\db.py", line 45, in log_etl_run
+    session.commit()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 2030, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 1311, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 1286, in _prepare_impl
+    self.session.flush()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 4331, in flush
+    self._flush(objects)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 4466, in _flush
+    with util.safe_reraise():
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 4427, in _flush
+    flush_context.execute()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\persistence.py", line 60, in save_obj
+    for (
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\persistence.py", line 223, in _organize_states_for_save
+    for state, dict_, mapper, connection in _connections_for_states(
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\persistence.py", line 1759, in _connections_for_states
+    connection = uowtransaction.transaction.connection(base_mapper)
+  File "<string>", line 2, in connection
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 1037, in connection
+    return self._connection_for_bind(bind, execution_options)
+  File "<string>", line 2, in _connection_for_bind
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 1173, in _connection_for_bind
+    conn = self._parent._connection_for_bind(
+  File "<string>", line 2, in _connection_for_bind
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\orm\session.py", line 1187, in _connection_for_bind
+    conn = bind.connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 3277, in connect
+    return self._connection_cls(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\base.py", line 3301, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 711, in checkout
+    rec = pool._do_get()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\impl.py", line 177, in _do_get
+    with util.safe_reraise():
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\impl.py", line 175, in _do_get
+    return self._create_connection()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 388, in _create_connection
+    return _ConnectionRecord(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 673, in __init__
+    self.__connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\sqlalchemy\engine\default.py", line 629, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\connections.py", line 365, in __init__
+    self.connect()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\connections.py", line 681, in connect
+    self._request_authentication()
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\connections.py", line 980, in _request_authentication
+    auth_packet = _auth.caching_sha2_password_auth(self, auth_packet)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\_auth.py", line 271, in caching_sha2_password_auth
+    data = sha2_rsa_encrypt(conn.password, conn.salt, conn.server_public_key)
+  File "C:\Users\hp\AppData\Roaming\Python\Python310\site-packages\pymysql\_auth.py", line 144, in sha2_rsa_encrypt
+    raise RuntimeError(
+RuntimeError: 'cryptography' package is required for sha256_password or caching_sha2_password auth methods
+2025-11-21 15:47:27,559 INFO etl.fetch_price_history - Starting fetch_price_history ETL. Universe file: Data\universe\nifty500.txt
+2025-11-21 15:47:27,560 INFO etl.fetch_price_history - Read 500 tickers from universe file
+2025-11-21 15:47:29,624 INFO etl.fetch_price_history - Company mapping created for 500 companies
+2025-11-21 15:47:29,625 INFO etl.fetch_price_history - Processing batch of 25 tickers
+2025-11-21 15:47:29,626 INFO etl.fetch_price_history - Downloading tickers batch: AADHARHFC.NS, AARTIIND.NS, AAVAS.NS, ABB.NS, ABBOTINDIA.NS, ABCAPITAL.NS, ABFRL.NS, ABLBL.NS, ABREL.NS, ABSLAMC.NS, ACC.NS, ACE.NS, ACMESOLAR.NS, ADANIENSOL.NS, ADANIENT.NS, ADANIGREEN.NS, ADANIPORTS.NS, ADANIPOWER.NS, ADVENTHTL.NS, AEGISLOG.NS, AEGISVOPAK.NS, AFCONS.NS, AFFLE.NS, AGARWALEYE.NS, AIAENG.NS
+2025-11-21 15:47:35,939 INFO etl.fetch_price_history - Inserted 380 rows for AADHARHFC.NS into DB
+2025-11-21 15:47:37,400 INFO etl.fetch_price_history - Inserted 1237 rows for AARTIIND.NS into DB
+2025-11-21 15:47:38,773 INFO etl.fetch_price_history - Inserted 1236 rows for AAVAS.NS into DB
+2025-11-21 15:47:40,224 INFO etl.fetch_price_history - Inserted 1237 rows for ABB.NS into DB
+2025-11-21 15:47:41,777 INFO etl.fetch_price_history - Inserted 1237 rows for ABBOTINDIA.NS into DB
+2025-11-21 15:47:43,321 INFO etl.fetch_price_history - Inserted 1237 rows for ABCAPITAL.NS into DB
+2025-11-21 15:47:44,806 INFO etl.fetch_price_history - Inserted 1237 rows for ABFRL.NS into DB
+2025-11-21 15:47:44,941 INFO etl.fetch_price_history - Inserted 104 rows for ABLBL.NS into DB
+2025-11-21 15:47:46,404 INFO etl.fetch_price_history - Inserted 1237 rows for ABREL.NS into DB
+2025-11-21 15:47:47,501 INFO etl.fetch_price_history - Inserted 1019 rows for ABSLAMC.NS into DB
+2025-11-21 15:47:48,881 INFO etl.fetch_price_history - Inserted 1237 rows for ACC.NS into DB
+2025-11-21 15:47:50,305 INFO etl.fetch_price_history - Inserted 1237 rows for ACE.NS into DB
+2025-11-21 15:47:50,566 INFO etl.fetch_price_history - Inserted 255 rows for ACMESOLAR.NS into DB
+2025-11-21 15:47:51,299 INFO etl.fetch_price_history - Inserted 556 rows for ADANIENSOL.NS into DB
+2025-11-21 15:47:52,616 INFO etl.fetch_price_history - Inserted 1237 rows for ADANIENT.NS into DB
+2025-11-21 15:47:54,367 INFO etl.fetch_price_history - Inserted 1237 rows for ADANIGREEN.NS into DB
+2025-11-21 15:47:55,921 INFO etl.fetch_price_history - Inserted 1237 rows for ADANIPORTS.NS into DB
+2025-11-21 15:47:57,301 INFO etl.fetch_price_history - Inserted 1237 rows for ADANIPOWER.NS into DB
+2025-11-21 15:47:57,332 INFO etl.fetch_price_history - Inserted 7 rows for ADVENTHTL.NS into DB
+2025-11-21 15:47:57,705 INFO etl.fetch_price_history - Inserted 366 rows for AEGISLOG.NS into DB
+2025-11-21 15:47:57,941 INFO etl.fetch_price_history - Inserted 121 rows for AEGISVOPAK.NS into DB
+2025-11-21 15:47:58,206 INFO etl.fetch_price_history - Inserted 262 rows for AFCONS.NS into DB
+2025-11-21 15:47:59,511 INFO etl.fetch_price_history - Inserted 1237 rows for AFFLE.NS into DB
+2025-11-21 15:47:59,785 INFO etl.fetch_price_history - Inserted 198 rows for AGARWALEYE.NS into DB
+2025-11-21 15:48:01,097 INFO etl.fetch_price_history - Inserted 1237 rows for AIAENG.NS into DB
+2025-11-21 15:48:03,109 INFO etl.fetch_price_history - Processing batch of 25 tickers
+2025-11-21 15:48:03,111 INFO etl.fetch_price_history - Downloading tickers batch: AIIL.NS, AJANTPHARM.NS, AKUMS.NS, AKZOINDIA.NS, ALKEM.NS, ALKYLAMINE.NS, ALOKINDS.NS, AMBER.NS, AMBUJACEM.NS, ANANDRATHI.NS, ANANTRAJ.NS, ANGELONE.NS, APARINDS.NS, APLAPOLLO.NS, APLLTD.NS, APOLLOHOSP.NS, APOLLOTYRE.NS, APTUS.NS, ARE&M.NS, ASAHIINDIA.NS, ASHOKLEY.NS, ASIANPAINT.NS, ASTERDM.NS, ASTRAL.NS, ASTRAZEN.NS
+2025-11-21 15:48:04,921 INFO etl.fetch_price_history - Inserted 391 rows for AIIL.NS into DB
+2025-11-21 15:48:06,311 INFO etl.fetch_price_history - Inserted 1236 rows for AJANTPHARM.NS into DB
+2025-11-21 15:48:06,676 INFO etl.fetch_price_history - Inserted 319 rows for AKUMS.NS into DB
+2025-11-21 15:48:08,303 INFO etl.fetch_price_history - Inserted 1236 rows for AKZOINDIA.NS into DB
+2025-11-21 15:48:09,656 INFO etl.fetch_price_history - Inserted 1237 rows for ALKEM.NS into DB
+2025-11-21 15:48:11,266 INFO etl.fetch_price_history - Inserted 1236 rows for ALKYLAMINE.NS into DB
+2025-11-21 15:48:13,061 INFO etl.fetch_price_history - Inserted 1237 rows for ALOKINDS.NS into DB
+2025-11-21 15:48:15,947 INFO etl.fetch_price_history - Inserted 1237 rows for AMBER.NS into DB
+2025-11-21 15:48:17,697 INFO etl.fetch_price_history - Inserted 1237 rows for AMBUJACEM.NS into DB
+2025-11-21 15:48:18,954 INFO etl.fetch_price_history - Inserted 976 rows for ANANDRATHI.NS into DB
+2025-11-21 15:48:20,751 INFO etl.fetch_price_history - Inserted 1237 rows for ANANTRAJ.NS into DB
+2025-11-21 15:48:22,560 INFO etl.fetch_price_history - Inserted 1237 rows for ANGELONE.NS into DB
+2025-11-21 15:48:24,351 INFO etl.fetch_price_history - Inserted 1237 rows for APARINDS.NS into DB
+2025-11-21 15:48:26,448 INFO etl.fetch_price_history - Inserted 1237 rows for APLAPOLLO.NS into DB
+2025-11-21 15:48:28,106 INFO etl.fetch_price_history - Inserted 1237 rows for APLLTD.NS into DB
+2025-11-21 15:48:29,713 INFO etl.fetch_price_history - Inserted 1237 rows for APOLLOHOSP.NS into DB
+2025-11-21 15:48:31,850 INFO etl.fetch_price_history - Inserted 1237 rows for APOLLOTYRE.NS into DB
+2025-11-21 15:48:34,007 INFO etl.fetch_price_history - Inserted 1052 rows for APTUS.NS into DB
+2025-11-21 15:48:34,723 INFO etl.fetch_price_history - Inserted 513 rows for ARE&M.NS into DB
+2025-11-21 15:48:37,284 INFO etl.fetch_price_history - Inserted 1236 rows for ASAHIINDIA.NS into DB
+2025-11-21 15:48:40,605 INFO etl.fetch_price_history - Inserted 1237 rows for ASHOKLEY.NS into DB
+2025-11-21 15:48:42,783 INFO etl.fetch_price_history - Inserted 1237 rows for ASIANPAINT.NS into DB
+2025-11-21 15:48:45,053 INFO etl.fetch_price_history - Inserted 1237 rows for ASTERDM.NS into DB
+2025-11-21 15:48:47,476 INFO etl.fetch_price_history - Inserted 1237 rows for ASTRAL.NS into DB
+2025-11-21 15:48:49,244 INFO etl.fetch_price_history - Inserted 1236 rows for ASTRAZEN.NS into DB
+2025-11-21 15:48:51,249 INFO etl.fetch_price_history - Processing batch of 25 tickers
+2025-11-21 15:48:51,249 INFO etl.fetch_price_history - Downloading tickers batch: ATGL.NS, ATHERENERG.NS, ATUL.NS, AUBANK.NS, AUROPHARMA.NS, AWL.NS, AXISBANK.NS, BAJAJ-AUTO.NS, BAJAJFINSV.NS, BAJAJHFL.NS, BAJAJHLDNG.NS, BAJFINANCE.NS, BALKRISIND.NS, BALRAMCHIN.NS, BANDHANBNK.NS, BANKBARODA.NS, BANKINDIA.NS, BASF.NS, BATAINDIA.NS, BAYERCROP.NS, BBTC.NS, BDL.NS, BEL.NS, BEML.NS, BERGEPAINT.NS
+2025-11-21 15:48:54,284 INFO etl.fetch_price_history - Inserted 1237 rows for ATGL.NS into DB
+2025-11-21 15:48:54,512 INFO etl.fetch_price_history - Inserted 140 rows for ATHERENERG.NS into DB
+2025-11-21 15:48:56,306 INFO etl.fetch_price_history - Inserted 1237 rows for ATUL.NS into DB
+2025-11-21 15:48:58,609 INFO etl.fetch_price_history - Inserted 1237 rows for AUBANK.NS into DB
+2025-11-21 15:49:00,067 INFO etl.fetch_price_history - Inserted 1237 rows for AUROPHARMA.NS into DB
+2025-11-21 15:49:01,322 INFO etl.fetch_price_history - Inserted 937 rows for AWL.NS into DB
+2025-11-21 15:49:03,470 INFO etl.fetch_price_history - Inserted 1237 rows for AXISBANK.NS into DB
+2025-11-21 15:49:05,493 INFO etl.fetch_price_history - Inserted 1237 rows for BAJAJ-AUTO.NS into DB
+2025-11-21 15:49:07,934 INFO etl.fetch_price_history - Inserted 1237 rows for BAJAJFINSV.NS into DB
+2025-11-21 15:49:08,481 INFO etl.fetch_price_history - Inserted 296 rows for BAJAJHFL.NS into DB
+2025-11-21 15:49:10,523 INFO etl.fetch_price_history - Inserted 1237 rows for BAJAJHLDNG.NS into DB
+2025-11-21 15:49:12,465 INFO etl.fetch_price_history - Inserted 1237 rows for BAJFINANCE.NS into DB
+2025-11-21 15:49:14,551 INFO etl.fetch_price_history - Inserted 1237 rows for BALKRISIND.NS into DB
+2025-11-21 15:49:16,707 INFO etl.fetch_price_history - Inserted 1237 rows for BALRAMCHIN.NS into DB
+2025-11-21 15:49:18,816 INFO etl.fetch_price_history - Inserted 1237 rows for BANDHANBNK.NS into DB
+2025-11-21 15:49:20,836 INFO etl.fetch_price_history - Inserted 1237 rows for BANKBARODA.NS into DB
+2025-11-21 15:49:23,134 INFO etl.fetch_price_history - Inserted 1237 rows for BANKINDIA.NS into DB
+2025-11-21 15:49:25,309 INFO etl.fetch_price_history - Inserted 1237 rows for BASF.NS into DB
+2025-11-21 15:49:27,714 INFO etl.fetch_price_history - Inserted 1237 rows for BATAINDIA.NS into DB
+2025-11-21 15:49:29,816 INFO etl.fetch_price_history - Inserted 1237 rows for BAYERCROP.NS into DB
+2025-11-21 15:49:31,829 INFO etl.fetch_price_history - Inserted 1237 rows for BBTC.NS into DB
+2025-11-21 15:49:33,999 INFO etl.fetch_price_history - Inserted 1237 rows for BDL.NS into DB
+2025-11-21 15:49:35,557 INFO etl.fetch_price_history - Inserted 1237 rows for BEL.NS into DB
+2025-11-21 15:49:37,457 INFO etl.fetch_price_history - Inserted 1237 rows for BEML.NS into DB
+2025-11-21 15:49:40,206 INFO etl.fetch_price_history - Inserted 1237 rows for BERGEPAINT.NS into DB
+2025-11-21 15:49:42,209 INFO etl.fetch_price_history - Processing batch of 25 tickers
+2025-11-21 15:49:42,210 INFO etl.fetch_price_history - Downloading tickers batch: BHARATFORG.NS, BHARTIARTL.NS, BHARTIHEXA.NS, BHEL.NS, BIKAJI.NS, BIOCON.NS, BLS.NS, BLUEDART.NS, BLUEJET.NS, BLUESTARCO.NS, BOSCHLTD.NS, BPCL.NS, BRIGADE.NS, BRITANNIA.NS, BSE.NS, BSOFT.NS, CAMPUS.NS, CAMS.NS, CANBK.NS, CANFINHOME.NS, CAPLIPOINT.NS, CARBORUNIV.NS, CASTROLIND.NS, CCL.NS, CDSL.NS
+2025-11-21 15:49:46,354 INFO etl.fetch_price_history - Inserted 1237 rows for BHARATFORG.NS into DB
+2025-11-21 15:49:48,601 INFO etl.fetch_price_history - Inserted 1237 rows for BHARTIARTL.NS into DB
+2025-11-21 15:49:49,341 INFO etl.fetch_price_history - Inserted 400 rows for BHARTIHEXA.NS into DB
+2025-11-21 15:49:51,467 INFO etl.fetch_price_history - Inserted 1237 rows for BHEL.NS into DB
+2025-11-21 15:49:52,811 INFO etl.fetch_price_history - Inserted 747 rows for BIKAJI.NS into DB
+2025-11-21 15:49:54,973 INFO etl.fetch_price_history - Inserted 1237 rows for BIOCON.NS into DB
+2025-11-21 15:49:57,619 INFO etl.fetch_price_history - Inserted 1237 rows for BLS.NS into DB
+2025-11-21 15:49:59,761 INFO etl.fetch_price_history - Inserted 1236 rows for BLUEDART.NS into DB
+2025-11-21 15:50:00,507 INFO etl.fetch_price_history - Inserted 509 rows for BLUEJET.NS into DB
+2025-11-21 15:50:02,187 INFO etl.fetch_price_history - Inserted 1236 rows for BLUESTARCO.NS into DB
+2025-11-21 15:50:04,276 INFO etl.fetch_price_history - Inserted 1236 rows for BOSCHLTD.NS into DB
+2025-11-21 15:50:06,199 INFO etl.fetch_price_history - Inserted 1237 rows for BPCL.NS into DB
+2025-11-21 15:50:08,213 INFO etl.fetch_price_history - Inserted 1237 rows for BRIGADE.NS into DB
+2025-11-21 15:50:10,914 INFO etl.fetch_price_history - Inserted 1237 rows for BRITANNIA.NS into DB
+2025-11-21 15:50:13,383 INFO etl.fetch_price_history - Inserted 1237 rows for BSE.NS into DB
+2025-11-21 15:50:16,070 INFO etl.fetch_price_history - Inserted 1237 rows for BSOFT.NS into DB
+2025-11-21 15:50:17,422 INFO etl.fetch_price_history - Inserted 878 rows for CAMPUS.NS into DB
+2025-11-21 15:50:20,144 INFO etl.fetch_price_history - Inserted 1237 rows for CAMS.NS into DB
+2025-11-21 15:50:22,665 INFO etl.fetch_price_history - Inserted 1237 rows for CANBK.NS into DB
+2025-11-21 15:50:25,055 INFO etl.fetch_price_history - Inserted 1237 rows for CANFINHOME.NS into DB
+2025-11-21 15:50:27,492 INFO etl.fetch_price_history - Inserted 1237 rows for CAPLIPOINT.NS into DB
+2025-11-21 15:50:29,678 INFO etl.fetch_price_history - Inserted 1236 rows for CARBORUNIV.NS into DB
+2025-11-21 15:50:32,061 INFO etl.fetch_price_history - Inserted 1237 rows for CASTROLIND.NS into DB
+2025-11-21 15:50:34,797 INFO etl.fetch_price_history - Inserted 1237 rows for CCL.NS into DB
+2025-11-21 15:50:37,219 INFO etl.fetch_price_history - Inserted 1237 rows for CDSL.NS into DB
+2025-11-21 15:50:39,224 INFO etl.fetch_price_history - Processing batch of 25 tickers
+2025-11-21 15:50:39,226 INFO etl.fetch_price_history - Downloading tickers batch: CEATLTD.NS, CENTRALBK.NS, CENTURYPLY.NS, CERA.NS, CESC.NS, CGCL.NS, CGPOWER.NS, CHALET.NS, CHAMBLFERT.NS, CHENNPETRO.NS, CHOICEIN.NS, CHOLAFIN.NS, CHOLAHLDNG.NS, CIPLA.NS, CLEAN.NS, COALINDIA.NS, COCHINSHIP.NS, COFORGE.NS, COHANCE.NS, COLPAL.NS, CONCOR.NS, CONCORDBIO.NS, COROMANDEL.NS, CRAFTSMAN.NS, CREDITACC.NS
+2025-11-21 15:50:42,596 INFO etl.fetch_price_history - Inserted 1237 rows for CEATLTD.NS into DB
+2025-11-21 15:50:44,796 INFO etl.fetch_price_history - Inserted 1237 rows for CENTRALBK.NS into DB
+2025-11-21 15:50:48,394 INFO etl.fetch_price_history - Inserted 1237 rows for CENTURYPLY.NS into DB
+2025-11-21 15:50:50,321 INFO etl.fetch_price_history - Inserted 1237 rows for CERA.NS into DB
+2025-11-21 15:50:52,565 INFO etl.fetch_price_history - Inserted 1237 rows for CESC.NS into DB
+2025-11-21 15:50:54,698 INFO etl.fetch_price_history - Inserted 1237 rows for CGCL.NS into DB
+2025-11-21 15:50:57,056 INFO etl.fetch_price_history - Inserted 1237 rows for CGPOWER.NS into DB
+2025-11-21 15:50:59,259 INFO etl.fetch_price_history - Inserted 1237 rows for CHALET.NS into DB
+2025-11-21 15:51:01,383 INFO etl.fetch_price_history - Inserted 1237 rows for CHAMBLFERT.NS into DB
+2025-11-21 15:51:03,458 INFO etl.fetch_price_history - Inserted 1237 rows for CHENNPETRO.NS into DB
+2025-11-21 15:51:05,171 INFO etl.fetch_price_history - Inserted 896 rows for CHOICEIN.NS into DB
+2025-11-21 15:51:07,382 INFO etl.fetch_price_history - Inserted 1237 rows for CHOLAFIN.NS into DB
+2025-11-21 15:51:09,783 INFO etl.fetch_price_history - Inserted 1236 rows for CHOLAHLDNG.NS into DB
+2025-11-21 15:51:11,905 INFO etl.fetch_price_history - Inserted 1237 rows for CIPLA.NS into DB
+2025-11-21 15:51:14,004 INFO etl.fetch_price_history - Inserted 1076 rows for CLEAN.NS into DB
+2025-11-21 15:51:16,393 INFO etl.fetch_price_history - Inserted 1237 rows for COALINDIA.NS into DB
+2025-11-21 15:51:18,507 INFO etl.fetch_price_history - Inserted 1237 rows for COCHINSHIP.NS into DB
+2025-11-21 15:51:20,743 INFO etl.fetch_price_history - Inserted 1237 rows for COFORGE.NS into DB
+2025-11-21 15:51:21,120 INFO etl.fetch_price_history - Inserted 137 rows for COHANCE.NS into DB
+2025-11-21 15:51:23,512 INFO etl.fetch_price_history - Inserted 1237 rows for COLPAL.NS into DB
+2025-11-21 15:51:26,969 INFO etl.fetch_price_history - Inserted 1237 rows for CONCOR.NS into DB
+2025-11-21 15:51:28,250 INFO etl.fetch_price_history - Inserted 559 rows for CONCORDBIO.NS into DB
+2025-11-21 15:51:30,853 INFO etl.fetch_price_history - Inserted 1237 rows for COROMANDEL.NS into DB
+2025-11-21 15:51:32,990 INFO etl.fetch_price_history - Inserted 1153 rows for CRAFTSMAN.NS into DB
+2025-11-21 15:51:35,914 INFO etl.fetch_price_history - Inserted 1237 rows for CREDITACC.NS into DB
+2025-11-21 15:51:37,923 INFO etl.fetch_price_history - Processing batch of 25 tickers
+2025-11-21 15:51:37,928 INFO etl.fetch_price_history - Downloading tickers batch: CRISIL.NS, CROMPTON.NS, CUB.NS, CUMMINSIND.NS, CYIENT.NS, DABUR.NS, DALBHARAT.NS, DATAPATTNS.NS, DBREALTY.NS, DCMSHRIRAM.NS, DEEPAKFERT.NS, DEEPAKNTR.NS, DELHIVERY.NS, DEVYANI.NS, DIVISLAB.NS, DIXON.NS, DLF.NS, DMART.NS, DOMS.NS, DRREDDY.NS, ECLERX.NS, EICHERMOT.NS, EIDPARRY.NS, EIHOTEL.NS, ELECON.NS
+2025-11-21 15:51:41,960 INFO etl.fetch_price_history - Inserted 1236 rows for CRISIL.NS into DB
+2025-11-21 15:51:44,398 INFO etl.fetch_price_history - Inserted 1237 rows for CROMPTON.NS into DB
+2025-11-21 15:51:46,760 INFO etl.fetch_price_history - Inserted 1237 rows for CUB.NS into DB
+2025-11-21 15:51:49,126 INFO etl.fetch_price_history - Inserted 1237 rows for CUMMINSIND.NS into DB
+2025-11-21 15:51:52,342 INFO etl.fetch_price_history - Inserted 1237 rows for CYIENT.NS into DB
+2025-11-21 15:51:55,235 INFO etl.fetch_price_history - Inserted 1237 rows for DABUR.NS into DB
+2025-11-21 15:51:57,966 INFO etl.fetch_price_history - Inserted 1236 rows for DALBHARAT.NS into DB
+2025-11-21 15:52:00,145 INFO etl.fetch_price_history - Inserted 968 rows for DATAPATTNS.NS into DB
+2025-11-21 15:52:02,577 INFO etl.fetch_price_history - Inserted 1237 rows for DBREALTY.NS into DB
+2025-11-21 15:52:05,024 INFO etl.fetch_price_history - Inserted 1236 rows for DCMSHRIRAM.NS into DB
+2025-11-21 15:52:07,277 INFO etl.fetch_price_history - Inserted 1237 rows for DEEPAKFERT.NS into DB
+2025-11-21 15:52:09,728 INFO etl.fetch_price_history - Inserted 1237 rows for DEEPAKNTR.NS into DB
+2025-11-21 15:52:11,515 INFO etl.fetch_price_history - Inserted 867 rows for DELHIVERY.NS into DB
+2025-11-21 15:52:13,945 INFO etl.fetch_price_history - Inserted 1057 rows for DEVYANI.NS into DB
+2025-11-21 15:52:16,402 INFO etl.fetch_price_history - Inserted 1237 rows for DIVISLAB.NS into DB
+2025-11-21 15:52:19,205 INFO etl.fetch_price_history - Inserted 1237 rows for DIXON.NS into DB
+2025-11-21 15:52:21,239 INFO etl.fetch_price_history - Inserted 1237 rows for DLF.NS into DB
+2025-11-21 15:52:24,097 INFO etl.fetch_price_history - Inserted 1237 rows for DMART.NS into DB
+2025-11-21 15:52:24,906 INFO etl.fetch_price_history - Inserted 476 rows for DOMS.NS into DB
+2025-11-21 15:52:26,897 INFO etl.fetch_price_history - Inserted 1237 rows for DRREDDY.NS into DB
+2025-11-21 15:52:29,318 INFO etl.fetch_price_history - Inserted 1237 rows for ECLERX.NS into DB
+2025-11-21 15:52:31,432 INFO etl.fetch_price_history - Inserted 1237 rows for EICHERMOT.NS into DB
+2025-11-21 15:52:33,767 INFO etl.fetch_price_history - Inserted 1237 rows for EIDPARRY.NS into DB
+2025-11-21 15:52:36,192 INFO etl.fetch_price_history - Inserted 1237 rows for EIHOTEL.NS into DB
+2025-11-21 15:52:38,605 INFO etl.fetch_price_history - Inserted 1237 rows for ELECON.NS into DB
+2025-11-21 15:52:40,618 INFO etl.fetch_price_history - Processing batch of 25 tickers
+2025-11-21 15:52:40,621 INFO etl.fetch_price_history - Downloading tickers batch: ELGIEQUIP.NS, EMAMILTD.NS, EMCURE.NS, ENDURANCE.NS, ENGINERSIN.NS, ENRIN.NS, ERIS.NS, ESCORTS.NS, ETERNAL.NS, EXIDEIND.NS, FACT.NS, FEDERALBNK.NS, FINCABLES.NS, FINPIPE.NS, FIRSTCRY.NS, FIVESTAR.NS, FLUOROCHEM.NS, FORCEMOT.NS, FORTIS.NS, FSL.NS, GAIL.NS, GESHIP.NS, GICRE.NS, GILLETTE.NS, GLAND.NS
+2025-11-21 15:52:44,370 INFO etl.fetch_price_history - Inserted 1237 rows for ELGIEQUIP.NS into DB
+2025-11-21 15:52:46,626 INFO etl.fetch_price_history - Inserted 1237 rows for EMAMILTD.NS into DB
+2025-11-21 15:52:47,225 INFO etl.fetch_price_history - Inserted 337 rows for EMCURE.NS into DB
+2025-11-21 15:52:49,765 INFO etl.fetch_price_history - Inserted 1237 rows for ENDURANCE.NS into DB
+2025-11-21 15:52:51,829 INFO etl.fetch_price_history - Inserted 1237 rows for ENGINERSIN.NS into DB
+2025-11-21 15:52:52,104 INFO etl.fetch_price_history - Inserted 106 rows for ENRIN.NS into DB
+2025-11-21 15:52:55,159 INFO etl.fetch_price_history - Inserted 1237 rows for ERIS.NS into DB
+2025-11-21 15:52:58,404 INFO etl.fetch_price_history - Inserted 1237 rows for ESCORTS.NS into DB
+2025-11-21 15:53:00,493 INFO etl.fetch_price_history - Inserted 1051 rows for ETERNAL.NS into DB
+2025-11-21 15:53:02,088 INFO etl.fetch_price_history - Inserted 1237 rows for EXIDEIND.NS into DB
+2025-11-21 15:53:04,044 INFO etl.fetch_price_history - Inserted 1236 rows for FACT.NS into DB
+2025-11-21 15:53:06,587 INFO etl.fetch_price_history - Inserted 1237 rows for FEDERALBNK.NS into DB
+2025-11-21 15:53:08,404 INFO etl.fetch_price_history - Inserted 1237 rows for FINCABLES.NS into DB
+2025-11-21 15:53:10,699 INFO etl.fetch_price_history - Inserted 1237 rows for FINPIPE.NS into DB
+2025-11-21 15:53:11,229 INFO etl.fetch_price_history - Inserted 318 rows for FIRSTCRY.NS into DB
+2025-11-21 15:53:12,292 INFO etl.fetch_price_history - Inserted 744 rows for FIVESTAR.NS into DB
+2025-11-21 15:53:14,563 INFO etl.fetch_price_history - Inserted 1237 rows for FLUOROCHEM.NS into DB
+2025-11-21 15:53:16,337 INFO etl.fetch_price_history - Inserted 1196 rows for FORCEMOT.NS into DB
+2025-11-21 15:53:18,045 INFO etl.fetch_price_history - Inserted 1237 rows for FORTIS.NS into DB
+2025-11-21 15:53:20,592 INFO etl.fetch_price_history - Inserted 1237 rows for FSL.NS into DB
+2025-11-21 15:53:22,832 INFO etl.fetch_price_history - Inserted 1237 rows for GAIL.NS into DB
+2025-11-21 15:53:25,080 INFO etl.fetch_price_history - Inserted 1237 rows for GESHIP.NS into DB
+2025-11-21 15:53:27,419 INFO etl.fetch_price_history - Inserted 1237 rows for GICRE.NS into DB
+2025-11-21 15:53:29,400 INFO etl.fetch_price_history - Inserted 1237 rows for GILLETTE.NS into DB
+2025-11-21 15:53:31,497 INFO etl.fetch_price_history - Inserted 1237 rows for GLAND.NS into DB
+2025-11-21 15:53:33,500 INFO etl.fetch_price_history - Processing batch of 25 tickers
+2025-11-21 15:53:33,500 INFO etl.fetch_price_history - Downloading tickers batch: GLAXO.NS, GLENMARK.NS, GMDCLTD.NS, GMRAIRPORT.NS, GODFRYPHLP.NS, GODIGIT.NS, GODREJAGRO.NS, GODREJCP.NS, GODREJIND.NS, GODREJPROP.NS, GPIL.NS, GRANULES.NS, GRAPHITE.NS, GRASIM.NS, GRAVITA.NS, GRSE.NS, GSPL.NS, GUJGASLTD.NS, GVT&D.NS, HAL.NS, HAPPSTMNDS.NS, HAVELLS.NS, HBLENGINE.NS, HCLTECH.NS, HDFCAMC.NS
+2025-11-21 15:53:37,200 INFO etl.fetch_price_history - Inserted 1237 rows for GLAXO.NS into DB
+2025-11-21 15:53:38,841 INFO etl.fetch_price_history - Inserted 1237 rows for GLENMARK.NS into DB
+2025-11-21 15:53:41,705 INFO etl.fetch_price_history - Inserted 1237 rows for GMDCLTD.NS into DB
+2025-11-21 15:53:43,896 INFO etl.fetch_price_history - Inserted 1237 rows for GMRAIRPORT.NS into DB
+2025-11-21 15:53:46,089 INFO etl.fetch_price_history - Inserted 1237 rows for GODFRYPHLP.NS into DB
+2025-11-21 15:53:46,949 INFO etl.fetch_price_history - Inserted 374 rows for GODIGIT.NS into DB
+2025-11-21 15:53:49,151 INFO etl.fetch_price_history - Inserted 1237 rows for GODREJAGRO.NS into DB
+2025-11-21 15:53:50,861 INFO etl.fetch_price_history - Inserted 1237 rows for GODREJCP.NS into DB
+2025-11-21 15:53:53,248 INFO etl.fetch_price_history - Inserted 1237 rows for GODREJIND.NS into DB
+2025-11-21 15:53:55,727 INFO etl.fetch_price_history - Inserted 1237 rows for GODREJPROP.NS into DB
+2025-11-21 15:54:00,004 INFO etl.fetch_price_history - Inserted 1237 rows for GPIL.NS into DB
+2025-11-21 15:54:03,086 INFO etl.fetch_price_history - Inserted 1237 rows for GRANULES.NS into DB
+2025-11-21 15:54:05,152 INFO etl.fetch_price_history - Inserted 1237 rows for GRAPHITE.NS into DB
+2025-11-21 15:54:07,541 INFO etl.fetch_price_history - Inserted 1237 rows for GRASIM.NS into DB
+2025-11-21 15:54:09,316 INFO etl.fetch_price_history - Inserted 1237 rows for GRAVITA.NS into DB
+2025-11-21 15:54:11,505 INFO etl.fetch_price_history - Inserted 1237 rows for GRSE.NS into DB
+2025-11-21 15:54:13,930 INFO etl.fetch_price_history - Inserted 1237 rows for GSPL.NS into DB
+2025-11-21 15:54:15,866 INFO etl.fetch_price_history - Inserted 1236 rows for GUJGASLTD.NS into DB
+2025-11-21 15:54:17,978 INFO etl.fetch_price_history - Inserted 1237 rows for GVT&D.NS into DB
+2025-11-21 15:54:20,123 INFO etl.fetch_price_history - Inserted 1237 rows for HAL.NS into DB
+2025-11-21 15:54:22,080 INFO etl.fetch_price_history - Inserted 1237 rows for HAPPSTMNDS.NS into DB
+2025-11-21 15:54:24,734 INFO etl.fetch_price_history - Inserted 1237 rows for HAVELLS.NS into DB
+2025-11-21 15:54:25,162 INFO etl.fetch_price_history - Inserted 235 rows for HBLENGINE.NS into DB
+2025-11-21 15:54:27,213 INFO etl.fetch_price_history - Inserted 1237 rows for HCLTECH.NS into DB
+2025-11-21 15:54:29,414 INFO etl.fetch_price_history - Inserted 1237 rows for HDFCAMC.NS into DB
+2025-11-21 15:54:31,425 INFO etl.fetch_price_history - Processing batch of 25 tickers
+2025-11-21 15:54:31,429 INFO etl.fetch_price_history - Downloading tickers batch: HDFCBANK.NS, HDFCLIFE.NS, HEG.NS, HEROMOTOCO.NS, HEXT.NS, HFCL.NS, HINDALCO.NS, HINDCOPPER.NS, HINDPETRO.NS, HINDUNILVR.NS, HINDZINC.NS, HOMEFIRST.NS, HONASA.NS, HONAUT.NS, HSCL.NS, HUDCO.NS, HYUNDAI.NS, ICICIBANK.NS, ICICIGI.NS, ICICIPRULI.NS, IDBI.NS, IDEA.NS, IDFCFIRSTB.NS, IEX.NS, IFCI.NS
+2025-11-21 15:54:35,220 INFO etl.fetch_price_history - Inserted 1237 rows for HDFCBANK.NS into DB
+2025-11-21 15:54:37,259 INFO etl.fetch_price_history - Inserted 1237 rows for HDFCLIFE.NS into DB
+2025-11-21 15:54:39,695 INFO etl.fetch_price_history - Inserted 1237 rows for HEG.NS into DB
+2025-11-21 15:54:41,647 INFO etl.fetch_price_history - Inserted 1237 rows for HEROMOTOCO.NS into DB
+2025-11-21 15:54:42,076 INFO etl.fetch_price_history - Inserted 185 rows for HEXT.NS into DB
+2025-11-21 15:54:44,679 INFO etl.fetch_price_history - Inserted 1237 rows for HFCL.NS into DB
+2025-11-21 15:54:46,664 INFO etl.fetch_price_history - Inserted 1237 rows for HINDALCO.NS into DB
+2025-11-21 15:54:49,062 INFO etl.fetch_price_history - Inserted 1237 rows for HINDCOPPER.NS into DB
+2025-11-21 15:54:51,199 INFO etl.fetch_price_history - Inserted 1237 rows for HINDPETRO.NS into DB
+2025-11-21 15:54:53,354 INFO etl.fetch_price_history - Inserted 1237 rows for HINDUNILVR.NS into DB
+2025-11-21 15:54:55,676 INFO etl.fetch_price_history - Inserted 1237 rows for HINDZINC.NS into DB
+2025-11-21 15:54:57,732 INFO etl.fetch_price_history - Inserted 1188 rows for HOMEFIRST.NS into DB
+2025-11-21 15:54:58,566 INFO etl.fetch_price_history - Inserted 504 rows for HONASA.NS into DB
+2025-11-21 15:55:00,842 INFO etl.fetch_price_history - Inserted 1237 rows for HONAUT.NS into DB
+2025-11-21 15:55:02,691 INFO etl.fetch_price_history - Inserted 1237 rows for HSCL.NS into DB
+2025-11-21 15:55:05,369 INFO etl.fetch_price_history - Inserted 1237 rows for HUDCO.NS into DB
+2025-11-21 15:55:05,866 INFO etl.fetch_price_history - Inserted 271 rows for HYUNDAI.NS into DB
+2025-11-21 15:55:08,015 INFO etl.fetch_price_history - Inserted 1237 rows for ICICIBANK.NS into DB
+2025-11-21 15:55:10,538 INFO etl.fetch_price_history - Inserted 1237 rows for ICICIGI.NS into DB
+2025-11-21 15:55:12,848 INFO etl.fetch_price_history - Inserted 1237 rows for ICICIPRULI.NS into DB
+2025-11-21 15:55:15,544 INFO etl.fetch_price_history - Inserted 1237 rows for IDBI.NS into DB
+2025-11-21 15:55:17,900 INFO etl.fetch_price_history - Inserted 1237 rows for IDEA.NS into DB
+2025-11-21 15:55:20,055 INFO etl.fetch_price_history - Inserted 1237 rows for IDFCFIRSTB.NS into DB
+2025-11-21 15:55:21,960 INFO etl.fetch_price_history - Inserted 1237 rows for IEX.NS into DB
+2025-11-21 15:55:24,205 INFO etl.fetch_price_history - Inserted 1237 rows for IFCI.NS into DB
+2025-11-21 15:55:26,210 INFO etl.fetch_price_history - Processing batch of 25 tickers
+2025-11-21 15:55:26,211 INFO etl.fetch_price_history - Downloading tickers batch: IGIL.NS, IGL.NS, IIFL.NS, IKS.NS, INDGN.NS, INDHOTEL.NS, INDIACEM.NS, INDIAMART.NS, INDIANB.NS, INDIGO.NS, INDUSINDBK.NS, INDUSTOWER.NS, INFY.NS, INOXINDIA.NS, INOXWIND.NS, INTELLECT.NS, IOB.NS, IOC.NS, IPCALAB.NS, IRB.NS, IRCON.NS, IRCTC.NS, IREDA.NS, IRFC.NS, ITC.NS
+2025-11-21 15:55:27,931 INFO etl.fetch_price_history - Inserted 228 rows for IGIL.NS into DB
+2025-11-21 15:55:29,854 INFO etl.fetch_price_history - Inserted 1237 rows for IGL.NS into DB
+2025-11-21 15:55:31,953 INFO etl.fetch_price_history - Inserted 1237 rows for IIFL.NS into DB
+2025-11-21 15:55:32,291 INFO etl.fetch_price_history - Inserted 230 rows for IKS.NS into DB
+2025-11-21 15:55:32,819 INFO etl.fetch_price_history - Inserted 382 rows for INDGN.NS into DB
+2025-11-21 15:55:34,945 INFO etl.fetch_price_history - Inserted 1237 rows for INDHOTEL.NS into DB
+2025-11-21 15:55:37,287 INFO etl.fetch_price_history - Inserted 1236 rows for INDIACEM.NS into DB
+2025-11-21 15:55:39,031 INFO etl.fetch_price_history - Inserted 1237 rows for INDIAMART.NS into DB
+2025-11-21 15:55:40,961 INFO etl.fetch_price_history - Inserted 1237 rows for INDIANB.NS into DB
+2025-11-21 15:55:42,860 INFO etl.fetch_price_history - Inserted 1237 rows for INDIGO.NS into DB
+2025-11-21 15:55:45,126 INFO etl.fetch_price_history - Inserted 1237 rows for INDUSINDBK.NS into DB
+2025-11-21 15:55:47,412 INFO etl.fetch_price_history - Inserted 1237 rows for INDUSTOWER.NS into DB
+2025-11-21 15:55:49,073 INFO etl.fetch_price_history - Inserted 1237 rows for INFY.NS into DB
+2025-11-21 15:55:49,731 INFO etl.fetch_price_history - Inserted 475 rows for INOXINDIA.NS into DB
+2025-11-21 15:55:52,113 INFO etl.fetch_price_history - Inserted 1237 rows for INOXWIND.NS into DB
+2025-11-21 15:55:54,390 INFO etl.fetch_price_history - Inserted 1237 rows for INTELLECT.NS into DB
+2025-11-21 15:55:56,343 INFO etl.fetch_price_history - Inserted 1237 rows for IOB.NS into DB
+2025-11-21 15:55:58,556 INFO etl.fetch_price_history - Inserted 1237 rows for IOC.NS into DB
+2025-11-21 15:56:00,502 INFO etl.fetch_price_history - Inserted 1237 rows for IPCALAB.NS into DB
+2025-11-21 15:56:02,832 INFO etl.fetch_price_history - Inserted 1237 rows for IRB.NS into DB
+2025-11-21 15:56:04,981 INFO etl.fetch_price_history - Inserted 1237 rows for IRCON.NS into DB
+2025-11-21 15:56:08,622 INFO etl.fetch_price_history - Inserted 1237 rows for IRCTC.NS into DB
+2025-11-21 15:56:09,973 INFO etl.fetch_price_history - Inserted 491 rows for IREDA.NS into DB
+2025-11-21 15:56:12,028 INFO etl.fetch_price_history - Inserted 1191 rows for IRFC.NS into DB
+2025-11-21 15:56:14,367 INFO etl.fetch_price_history - Inserted 1237 rows for ITC.NS into DB
+2025-11-21 15:56:16,375 INFO etl.fetch_price_history - Processing batch of 25 tickers
+2025-11-21 15:56:16,378 INFO etl.fetch_price_history - Downloading tickers batch: ITCHOTELS.NS, ITI.NS, J&KBANK.NS, JBCHEPHARM.NS, JBMA.NS, JINDALSAW.NS, JINDALSTEL.NS, JIOFIN.NS, JKCEMENT.NS, JKTYRE.NS, JMFINANCIL.NS, JPPOWER.NS, JSL.NS, JSWENERGY.NS, JSWINFRA.NS, JSWSTEEL.NS, JUBLFOOD.NS, JUBLINGREA.NS, JUBLPHARMA.NS, JWL.NS, JYOTHYLAB.NS, JYOTICNC.NS, KAJARIACER.NS, KALYANKJIL.NS, KARURVYSYA.NS
+2025-11-21 15:56:17,931 INFO etl.fetch_price_history - Inserted 201 rows for ITCHOTELS.NS into DB
+2025-11-21 15:56:20,206 INFO etl.fetch_price_history - Inserted 1237 rows for ITI.NS into DB
+2025-11-21 15:56:23,066 INFO etl.fetch_price_history - Inserted 1237 rows for J&KBANK.NS into DB
+2025-11-21 15:56:25,770 INFO etl.fetch_price_history - Inserted 1237 rows for JBCHEPHARM.NS into DB
+2025-11-21 15:56:28,565 INFO etl.fetch_price_history - Inserted 1237 rows for JBMA.NS into DB
+2025-11-21 15:56:30,775 INFO etl.fetch_price_history - Inserted 1237 rows for JINDALSAW.NS into DB
+2025-11-21 15:56:33,466 INFO etl.fetch_price_history - Inserted 1237 rows for JINDALSTEL.NS into DB
+2025-11-21 15:56:34,816 INFO etl.fetch_price_history - Inserted 553 rows for JIOFIN.NS into DB
+2025-11-21 15:56:37,245 INFO etl.fetch_price_history - Inserted 1236 rows for JKCEMENT.NS into DB
+2025-11-21 15:56:39,712 INFO etl.fetch_price_history - Inserted 1237 rows for JKTYRE.NS into DB
+2025-11-21 15:56:41,875 INFO etl.fetch_price_history - Inserted 1237 rows for JMFINANCIL.NS into DB
+2025-11-21 15:56:45,083 INFO etl.fetch_price_history - Inserted 1237 rows for JPPOWER.NS into DB
+2025-11-21 15:56:47,583 INFO etl.fetch_price_history - Inserted 1237 rows for JSL.NS into DB
+2025-11-21 15:56:49,884 INFO etl.fetch_price_history - Inserted 1237 rows for JSWENERGY.NS into DB
+2025-11-21 15:56:50,958 INFO etl.fetch_price_history - Inserted 524 rows for JSWINFRA.NS into DB
+2025-11-21 15:56:53,664 INFO etl.fetch_price_history - Inserted 1237 rows for JSWSTEEL.NS into DB
+2025-11-21 15:56:56,452 INFO etl.fetch_price_history - Inserted 1237 rows for JUBLFOOD.NS into DB
+2025-11-21 15:56:58,589 INFO etl.fetch_price_history - Inserted 1157 rows for JUBLINGREA.NS into DB
+2025-11-21 15:57:01,126 INFO etl.fetch_price_history - Inserted 1237 rows for JUBLPHARMA.NS into DB
+2025-11-21 15:57:03,709 INFO etl.fetch_price_history - Inserted 1237 rows for JWL.NS into DB
+2025-11-21 15:57:06,376 INFO etl.fetch_price_history - Inserted 1237 rows for JYOTHYLAB.NS into DB
+2025-11-21 15:57:07,377 INFO etl.fetch_price_history - Inserted 458 rows for JYOTICNC.NS into DB
+2025-11-21 15:57:10,184 INFO etl.fetch_price_history - Inserted 1236 rows for KAJARIACER.NS into DB
+2025-11-21 15:57:12,628 INFO etl.fetch_price_history - Inserted 1152 rows for KALYANKJIL.NS into DB
+2025-11-21 15:57:15,962 INFO etl.fetch_price_history - Inserted 1237 rows for KARURVYSYA.NS into DB
+2025-11-21 15:57:17,971 INFO etl.fetch_price_history - Processing batch of 25 tickers
+2025-11-21 15:57:17,972 INFO etl.fetch_price_history - Downloading tickers batch: KAYNES.NS, KEC.NS, KEI.NS, KFINTECH.NS, KIMS.NS, KIRLOSBROS.NS, KIRLOSENG.NS, KOTAKBANK.NS, KPIL.NS, KPITTECH.NS, KPRMILL.NS, KSB.NS, LALPATHLAB.NS, LATENTVIEW.NS, LAURUSLABS.NS, LEMONTREE.NS, LICHSGFIN.NS, LICI.NS, LINDEINDIA.NS, LLOYDSME.NS, LODHA.NS, LT.NS, LTF.NS, LTFOODS.NS, LTIM.NS
+2025-11-21 15:57:20,537 INFO etl.fetch_price_history - Inserted 743 rows for KAYNES.NS into DB
+2025-11-21 15:57:22,974 INFO etl.fetch_price_history - Inserted 1237 rows for KEC.NS into DB
+2025-11-21 15:57:26,259 INFO etl.fetch_price_history - Inserted 1237 rows for KEI.NS into DB
+2025-11-21 15:57:27,460 INFO etl.fetch_price_history - Inserted 716 rows for KFINTECH.NS into DB
+2025-11-21 15:57:29,624 INFO etl.fetch_price_history - Inserted 1090 rows for KIMS.NS into DB
+2025-11-21 15:57:31,745 INFO etl.fetch_price_history - Inserted 1237 rows for KIRLOSBROS.NS into DB
+2025-11-21 15:57:34,078 INFO etl.fetch_price_history - Inserted 1237 rows for KIRLOSENG.NS into DB
+2025-11-21 15:57:36,400 INFO etl.fetch_price_history - Inserted 1237 rows for KOTAKBANK.NS into DB
+2025-11-21 15:57:37,397 INFO etl.fetch_price_history - Inserted 597 rows for KPIL.NS into DB
+2025-11-21 15:57:39,643 INFO etl.fetch_price_history - Inserted 1237 rows for KPITTECH.NS into DB
+2025-11-21 15:57:41,481 INFO etl.fetch_price_history - Inserted 1237 rows for KPRMILL.NS into DB
+2025-11-21 15:57:43,709 INFO etl.fetch_price_history - Inserted 1237 rows for KSB.NS into DB
+2025-11-21 15:57:45,839 INFO etl.fetch_price_history - Inserted 1237 rows for LALPATHLAB.NS into DB
+2025-11-21 15:57:47,587 INFO etl.fetch_price_history - Inserted 991 rows for LATENTVIEW.NS into DB
+2025-11-21 15:57:49,550 INFO etl.fetch_price_history - Inserted 1237 rows for LAURUSLABS.NS into DB
+2025-11-21 15:57:51,866 INFO etl.fetch_price_history - Inserted 1237 rows for LEMONTREE.NS into DB
+2025-11-21 15:57:54,631 INFO etl.fetch_price_history - Inserted 1237 rows for LICHSGFIN.NS into DB
+2025-11-21 15:57:55,990 INFO etl.fetch_price_history - Inserted 872 rows for LICI.NS into DB
+2025-11-21 15:57:58,370 INFO etl.fetch_price_history - Inserted 1237 rows for LINDEINDIA.NS into DB
+2025-11-21 15:57:59,380 INFO etl.fetch_price_history - Inserted 582 rows for LLOYDSME.NS into DB
+2025-11-21 15:58:01,564 INFO etl.fetch_price_history - Inserted 1139 rows for LODHA.NS into DB
+2025-11-21 15:58:04,183 INFO etl.fetch_price_history - Inserted 1237 rows for LT.NS into DB
+2025-11-21 15:58:06,375 INFO etl.fetch_price_history - Inserted 1237 rows for LTF.NS into DB
+2025-11-21 15:58:07,455 INFO etl.fetch_price_history - Inserted 506 rows for LTFOODS.NS into DB
+2025-11-21 15:58:09,835 INFO etl.fetch_price_history - Inserted 1237 rows for LTIM.NS into DB
+2025-11-21 15:58:11,847 INFO etl.fetch_price_history - Processing batch of 25 tickers
+2025-11-21 15:58:11,848 INFO etl.fetch_price_history - Downloading tickers batch: LTTS.NS, LUPIN.NS, M&M.NS, M&MFIN.NS, MAHABANK.NS, MAHSCOOTER.NS, MAHSEAMLES.NS, MANAPPURAM.NS, MANKIND.NS, MANYAVAR.NS, MAPMYINDIA.NS, MARICO.NS, MARUTI.NS, MAXHEALTH.NS, MAZDOCK.NS, MCX.NS, MEDANTA.NS, METROPOLIS.NS, MFSL.NS, MGL.NS, MINDACORP.NS, MMTC.NS, MOTHERSON.NS, MOTILALOFS.NS, MPHASIS.NS
+2025-11-21 15:58:15,630 INFO etl.fetch_price_history - Inserted 1237 rows for LTTS.NS into DB
+2025-11-21 15:58:18,640 INFO etl.fetch_price_history - Inserted 1237 rows for LUPIN.NS into DB
+2025-11-21 15:58:20,983 INFO etl.fetch_price_history - Inserted 1237 rows for M&M.NS into DB
+2025-11-21 15:58:24,244 INFO etl.fetch_price_history - Inserted 1237 rows for M&MFIN.NS into DB
+2025-11-21 15:58:26,187 INFO etl.fetch_price_history - Inserted 1237 rows for MAHABANK.NS into DB
+2025-11-21 15:58:28,265 INFO etl.fetch_price_history - Inserted 1236 rows for MAHSCOOTER.NS into DB
+2025-11-21 15:58:30,228 INFO etl.fetch_price_history - Inserted 1237 rows for MAHSEAMLES.NS into DB
+2025-11-21 15:58:32,195 INFO etl.fetch_price_history - Inserted 1237 rows for MANAPPURAM.NS into DB
+2025-11-21 15:58:33,278 INFO etl.fetch_price_history - Inserted 630 rows for MANKIND.NS into DB
+2025-11-21 15:58:34,955 INFO etl.fetch_price_history - Inserted 931 rows for MANYAVAR.NS into DB
+2025-11-21 15:58:36,783 INFO etl.fetch_price_history - Inserted 971 rows for MAPMYINDIA.NS into DB
+2025-11-21 15:58:38,584 INFO etl.fetch_price_history - Inserted 1237 rows for MARICO.NS into DB
+2025-11-21 15:58:40,499 INFO etl.fetch_price_history - Inserted 1237 rows for MARUTI.NS into DB
+2025-11-21 15:58:42,715 INFO etl.fetch_price_history - Inserted 1237 rows for MAXHEALTH.NS into DB
+2025-11-21 15:58:45,108 INFO etl.fetch_price_history - Inserted 1237 rows for MAZDOCK.NS into DB
+2025-11-21 15:58:47,141 INFO etl.fetch_price_history - Inserted 1237 rows for MCX.NS into DB
+2025-11-21 15:58:48,348 INFO etl.fetch_price_history - Inserted 744 rows for MEDANTA.NS into DB
+2025-11-21 15:58:50,770 INFO etl.fetch_price_history - Inserted 1236 rows for METROPOLIS.NS into DB
+2025-11-21 15:58:52,813 INFO etl.fetch_price_history - Inserted 1237 rows for MFSL.NS into DB
+2025-11-21 15:58:54,912 INFO etl.fetch_price_history - Inserted 1237 rows for MGL.NS into DB
+2025-11-21 15:58:57,464 INFO etl.fetch_price_history - Inserted 1237 rows for MINDACORP.NS into DB
+2025-11-21 15:58:59,425 INFO etl.fetch_price_history - Inserted 1237 rows for MMTC.NS into DB
+2025-11-21 15:59:01,851 INFO etl.fetch_price_history - Inserted 1237 rows for MOTHERSON.NS into DB
+2025-11-21 15:59:04,138 INFO etl.fetch_price_history - Inserted 1237 rows for MOTILALOFS.NS into DB
+2025-11-21 15:59:06,071 INFO etl.fetch_price_history - Inserted 1237 rows for MPHASIS.NS into DB
+2025-11-21 15:59:08,074 INFO etl.fetch_price_history - Processing batch of 25 tickers
+2025-11-21 15:59:08,077 INFO etl.fetch_price_history - Downloading tickers batch: MRF.NS, MRPL.NS, MSUMI.NS, MUTHOOTFIN.NS, NAM-INDIA.NS, NATCOPHARM.NS, NATIONALUM.NS, NAUKRI.NS, NAVA.NS, NAVINFLUOR.NS, NBCC.NS, NCC.NS, NESTLEIND.NS, NETWEB.NS, NEULANDLAB.NS, NEWGEN.NS, NH.NS, NHPC.NS, NIACL.NS, NIFTY 500.NS, NIVABUPA.NS, NLCINDIA.NS, NMDC.NS, NSLNISP.NS, NTPC.NS
+2025-11-21 15:59:10,568 WARNING etl.fetch_price_history - Failed to parse NIFTY 500.NS from batch: 'NIFTY 500.NS'
+2025-11-21 15:59:12,299 INFO etl.fetch_price_history - Inserted 1237 rows for MRF.NS into DB
+2025-11-21 15:59:14,319 INFO etl.fetch_price_history - Inserted 1237 rows for MRPL.NS into DB
+2025-11-21 15:59:16,984 INFO etl.fetch_price_history - Inserted 905 rows for MSUMI.NS into DB
+2025-11-21 15:59:22,028 INFO etl.fetch_price_history - Inserted 1237 rows for MUTHOOTFIN.NS into DB
+2025-11-21 15:59:24,107 INFO etl.fetch_price_history - Inserted 1237 rows for NAM-INDIA.NS into DB
+2025-11-21 15:59:27,086 INFO etl.fetch_price_history - Inserted 1237 rows for NATCOPHARM.NS into DB
+2025-11-21 15:59:29,319 INFO etl.fetch_price_history - Inserted 1237 rows for NATIONALUM.NS into DB
+2025-11-21 15:59:31,570 INFO etl.fetch_price_history - Inserted 1237 rows for NAUKRI.NS into DB
+2025-11-21 15:59:33,743 INFO etl.fetch_price_history - Inserted 1237 rows for NAVA.NS into DB
+2025-11-21 15:59:35,504 INFO etl.fetch_price_history - Inserted 1237 rows for NAVINFLUOR.NS into DB
+2025-11-21 15:59:37,619 INFO etl.fetch_price_history - Inserted 1237 rows for NBCC.NS into DB
+2025-11-21 15:59:39,732 INFO etl.fetch_price_history - Inserted 1237 rows for NCC.NS into DB
+2025-11-21 15:59:41,794 INFO etl.fetch_price_history - Inserted 1237 rows for NESTLEIND.NS into DB
+2025-11-21 15:59:42,657 INFO etl.fetch_price_history - Inserted 574 rows for NETWEB.NS into DB
+2025-11-21 15:59:45,060 INFO etl.fetch_price_history - Inserted 1237 rows for NEULANDLAB.NS into DB
+2025-11-21 15:59:47,389 INFO etl.fetch_price_history - Inserted 1237 rows for NEWGEN.NS into DB
+2025-11-21 15:59:49,054 INFO etl.fetch_price_history - Inserted 1237 rows for NH.NS into DB
+2025-11-21 15:59:51,747 INFO etl.fetch_price_history - Inserted 1237 rows for NHPC.NS into DB
+2025-11-21 15:59:54,394 INFO etl.fetch_price_history - Inserted 1237 rows for NIACL.NS into DB
+2025-11-21 15:59:54,396 WARNING etl.fetch_price_history - No data for NIFTY 500.NS
+2025-11-21 15:59:55,023 INFO etl.fetch_price_history - Inserted 254 rows for NIVABUPA.NS into DB
+2025-11-21 15:59:57,979 INFO etl.fetch_price_history - Inserted 1237 rows for NLCINDIA.NS into DB
+2025-11-21 15:59:59,673 INFO etl.fetch_price_history - Inserted 1237 rows for NMDC.NS into DB
+2025-11-21 16:00:00,632 INFO etl.fetch_price_history - Inserted 680 rows for NSLNISP.NS into DB
+2025-11-21 16:00:02,911 INFO etl.fetch_price_history - Inserted 1237 rows for NTPC.NS into DB
+2025-11-21 16:00:04,914 INFO etl.fetch_price_history - Processing batch of 25 tickers
+2025-11-21 16:00:04,919 INFO etl.fetch_price_history - Downloading tickers batch: NTPCGREEN.NS, NUVAMA.NS, NUVOCO.NS, NYKAA.NS, OBEROIRLTY.NS, OFSS.NS, OIL.NS, OLAELEC.NS, OLECTRA.NS, ONESOURCE.NS, ONGC.NS, PAGEIND.NS, PATANJALI.NS, PAYTM.NS, PCBL.NS, PERSISTENT.NS, PETRONET.NS, PFC.NS, PFIZER.NS, PGEL.NS, PGHH.NS, PHOENIXLTD.NS, PIDILITIND.NS, PIIND.NS, PNB.NS
+2025-11-21 16:00:06,650 INFO etl.fetch_price_history - Inserted 247 rows for NTPCGREEN.NS into DB
+2025-11-21 16:00:07,636 INFO etl.fetch_price_history - Inserted 528 rows for NUVAMA.NS into DB
+2025-11-21 16:00:09,624 INFO etl.fetch_price_history - Inserted 1052 rows for NUVOCO.NS into DB
+2025-11-21 16:00:11,287 INFO etl.fetch_price_history - Inserted 999 rows for NYKAA.NS into DB
+2025-11-21 16:00:13,397 INFO etl.fetch_price_history - Inserted 1237 rows for OBEROIRLTY.NS into DB
+2025-11-21 16:00:16,042 INFO etl.fetch_price_history - Inserted 1237 rows for OFSS.NS into DB
+2025-11-21 16:00:18,370 INFO etl.fetch_price_history - Inserted 1237 rows for OIL.NS into DB
+2025-11-21 16:00:18,774 INFO etl.fetch_price_history - Inserted 321 rows for OLAELEC.NS into DB
+2025-11-21 16:00:21,465 INFO etl.fetch_price_history - Inserted 1237 rows for OLECTRA.NS into DB
+2025-11-21 16:00:22,640 INFO etl.fetch_price_history - Inserted 206 rows for ONESOURCE.NS into DB
+2025-11-21 16:00:26,442 INFO etl.fetch_price_history - Inserted 1237 rows for ONGC.NS into DB
+2025-11-21 16:00:28,913 INFO etl.fetch_price_history - Inserted 1236 rows for PAGEIND.NS into DB
+2025-11-21 16:00:30,789 INFO etl.fetch_price_history - Inserted 1237 rows for PATANJALI.NS into DB
+2025-11-21 16:00:32,304 INFO etl.fetch_price_history - Inserted 993 rows for PAYTM.NS into DB
+2025-11-21 16:00:34,288 INFO etl.fetch_price_history - Inserted 1237 rows for PCBL.NS into DB
+2025-11-21 16:00:36,295 INFO etl.fetch_price_history - Inserted 1237 rows for PERSISTENT.NS into DB
+2025-11-21 16:00:39,044 INFO etl.fetch_price_history - Inserted 1237 rows for PETRONET.NS into DB
+2025-11-21 16:00:41,022 INFO etl.fetch_price_history - Inserted 1237 rows for PFC.NS into DB
+2025-11-21 16:00:43,760 INFO etl.fetch_price_history - Inserted 1237 rows for PFIZER.NS into DB
+2025-11-21 16:00:45,528 INFO etl.fetch_price_history - Inserted 1237 rows for PGEL.NS into DB
+2025-11-21 16:00:47,410 INFO etl.fetch_price_history - Inserted 1237 rows for PGHH.NS into DB
+2025-11-21 16:00:49,825 INFO etl.fetch_price_history - Inserted 1237 rows for PHOENIXLTD.NS into DB
+2025-11-21 16:00:52,016 INFO etl.fetch_price_history - Inserted 1237 rows for PIDILITIND.NS into DB
+2025-11-21 16:00:54,462 INFO etl.fetch_price_history - Inserted 1237 rows for PIIND.NS into DB
+2025-11-21 16:00:56,512 INFO etl.fetch_price_history - Inserted 1237 rows for PNB.NS into DB
+2025-11-21 16:00:58,514 INFO etl.fetch_price_history - Processing batch of 25 tickers
+2025-11-21 16:00:58,515 INFO etl.fetch_price_history - Downloading tickers batch: PNBHOUSING.NS, POLICYBZR.NS, POLYCAB.NS, POLYMED.NS, POONAWALLA.NS, POWERGRID.NS, POWERINDIA.NS, PPLPHARMA.NS, PRAJIND.NS, PREMIERENE.NS, PRESTIGE.NS, PTCIL.NS, PVRINOX.NS, RADICO.NS, RAILTEL.NS, RAINBOW.NS, RAMCOCEM.NS, RBLBANK.NS, RCF.NS, RECLTD.NS, REDINGTON.NS, RELIANCE.NS, RELINFRA.NS, RHIM.NS, RITES.NS
+2025-11-21 16:01:01,853 INFO etl.fetch_price_history - Inserted 1237 rows for PNBHOUSING.NS into DB
+2025-11-21 16:01:03,047 INFO etl.fetch_price_history - Inserted 996 rows for POLICYBZR.NS into DB
+2025-11-21 16:01:05,395 INFO etl.fetch_price_history - Inserted 1237 rows for POLYCAB.NS into DB
+2025-11-21 16:01:07,813 INFO etl.fetch_price_history - Inserted 1237 rows for POLYMED.NS into DB
+2025-11-21 16:01:10,097 INFO etl.fetch_price_history - Inserted 1237 rows for POONAWALLA.NS into DB
+2025-11-21 16:01:12,731 INFO etl.fetch_price_history - Inserted 1237 rows for POWERGRID.NS into DB
+2025-11-21 16:01:15,798 INFO etl.fetch_price_history - Inserted 1237 rows for POWERINDIA.NS into DB
+2025-11-21 16:01:17,441 INFO etl.fetch_price_history - Inserted 765 rows for PPLPHARMA.NS into DB
+2025-11-21 16:01:19,941 INFO etl.fetch_price_history - Inserted 1237 rows for PRAJIND.NS into DB
+2025-11-21 16:01:20,762 INFO etl.fetch_price_history - Inserted 305 rows for PREMIERENE.NS into DB
+2025-11-21 16:01:22,970 INFO etl.fetch_price_history - Inserted 1237 rows for PRESTIGE.NS into DB
+2025-11-21 16:01:24,571 INFO etl.fetch_price_history - Inserted 607 rows for PTCIL.NS into DB
+2025-11-21 16:01:26,792 INFO etl.fetch_price_history - Inserted 731 rows for PVRINOX.NS into DB
+2025-11-21 16:01:30,464 INFO etl.fetch_price_history - Inserted 1237 rows for RADICO.NS into DB
+2025-11-21 16:01:33,318 INFO etl.fetch_price_history - Inserted 1171 rows for RAILTEL.NS into DB
+2025-11-21 16:01:35,228 INFO etl.fetch_price_history - Inserted 876 rows for RAINBOW.NS into DB
+2025-11-21 16:01:38,623 INFO etl.fetch_price_history - Inserted 1236 rows for RAMCOCEM.NS into DB
+2025-11-21 16:01:41,500 INFO etl.fetch_price_history - Inserted 1237 rows for RBLBANK.NS into DB
+2025-11-21 16:01:44,636 INFO etl.fetch_price_history - Inserted 1237 rows for RCF.NS into DB
+2025-11-21 16:01:47,631 INFO etl.fetch_price_history - Inserted 1237 rows for RECLTD.NS into DB
+2025-11-21 16:01:50,366 INFO etl.fetch_price_history - Inserted 1237 rows for REDINGTON.NS into DB
+2025-11-21 16:01:52,929 INFO etl.fetch_price_history - Inserted 1237 rows for RELIANCE.NS into DB
+2025-11-21 16:01:55,868 INFO etl.fetch_price_history - Inserted 1237 rows for RELINFRA.NS into DB
+2025-11-21 16:01:58,807 INFO etl.fetch_price_history - Inserted 1237 rows for RHIM.NS into DB
+2025-11-21 16:02:01,583 INFO etl.fetch_price_history - Inserted 1237 rows for RITES.NS into DB
+2025-11-21 16:02:03,587 INFO etl.fetch_price_history - Processing batch of 25 tickers
+2025-11-21 16:02:03,588 INFO etl.fetch_price_history - Downloading tickers batch: RKFORGE.NS, RPOWER.NS, RRKABEL.NS, RVNL.NS, SAGILITY.NS, SAIL.NS, SAILIFE.NS, SAMMAANCAP.NS, SAPPHIRE.NS, SARDAEN.NS, SAREGAMA.NS, SBFC.NS, SBICARD.NS, SBILIFE.NS, SBIN.NS, SCHAEFFLER.NS, SCHNEIDER.NS, SCI.NS, SHREECEM.NS, SHRIRAMFIN.NS, SHYAMMETL.NS, SIEMENS.NS, SIGNATURE.NS, SJVN.NS, SKFINDIA.NS
+2025-11-21 16:02:06,798 INFO etl.fetch_price_history - Inserted 1237 rows for RKFORGE.NS into DB
+2025-11-21 16:02:08,684 INFO etl.fetch_price_history - Inserted 1237 rows for RPOWER.NS into DB
+2025-11-21 16:02:09,414 INFO etl.fetch_price_history - Inserted 533 rows for RRKABEL.NS into DB
+2025-11-21 16:02:11,366 INFO etl.fetch_price_history - Inserted 1237 rows for RVNL.NS into DB
+2025-11-21 16:02:11,890 INFO etl.fetch_price_history - Inserted 256 rows for SAGILITY.NS into DB
+2025-11-21 16:02:14,764 INFO etl.fetch_price_history - Inserted 1237 rows for SAIL.NS into DB
+2025-11-21 16:02:15,225 INFO etl.fetch_price_history - Inserted 232 rows for SAILIFE.NS into DB
+2025-11-21 16:02:17,743 INFO etl.fetch_price_history - Inserted 1237 rows for SAMMAANCAP.NS into DB
+2025-11-21 16:02:19,795 INFO etl.fetch_price_history - Inserted 992 rows for SAPPHIRE.NS into DB
+2025-11-21 16:02:22,654 INFO etl.fetch_price_history - Inserted 1237 rows for SARDAEN.NS into DB
+2025-11-21 16:02:26,014 INFO etl.fetch_price_history - Inserted 1237 rows for SAREGAMA.NS into DB
+2025-11-21 16:02:27,467 INFO etl.fetch_price_history - Inserted 556 rows for SBFC.NS into DB
+2025-11-21 16:02:30,581 INFO etl.fetch_price_history - Inserted 1237 rows for SBICARD.NS into DB
+2025-11-21 16:02:35,223 INFO etl.fetch_price_history - Inserted 1237 rows for SBILIFE.NS into DB
+2025-11-21 16:02:37,260 INFO etl.fetch_price_history - Inserted 1237 rows for SBIN.NS into DB
+2025-11-21 16:02:39,200 INFO etl.fetch_price_history - Inserted 1237 rows for SCHAEFFLER.NS into DB
+2025-11-21 16:02:41,286 INFO etl.fetch_price_history - Inserted 1237 rows for SCHNEIDER.NS into DB
+2025-11-21 16:02:43,445 INFO etl.fetch_price_history - Inserted 1237 rows for SCI.NS into DB
+2025-11-21 16:02:45,895 INFO etl.fetch_price_history - Inserted 1236 rows for SHREECEM.NS into DB
+2025-11-21 16:02:48,420 INFO etl.fetch_price_history - Inserted 1237 rows for SHRIRAMFIN.NS into DB
+2025-11-21 16:02:50,102 INFO etl.fetch_price_history - Inserted 1092 rows for SHYAMMETL.NS into DB
+2025-11-21 16:02:52,056 INFO etl.fetch_price_history - Inserted 1237 rows for SIEMENS.NS into DB
+2025-11-21 16:02:53,167 INFO etl.fetch_price_history - Inserted 531 rows for SIGNATURE.NS into DB
+2025-11-21 16:02:55,782 INFO etl.fetch_price_history - Inserted 1237 rows for SJVN.NS into DB
+2025-11-21 16:02:58,210 INFO etl.fetch_price_history - Inserted 1237 rows for SKFINDIA.NS into DB
+2025-11-21 16:03:00,216 INFO etl.fetch_price_history - Processing batch of 25 tickers
+2025-11-21 16:03:00,218 INFO etl.fetch_price_history - Downloading tickers batch: SOBHA.NS, SOLARINDS.NS, SONACOMS.NS, SONATSOFTW.NS, SRF.NS, STARHEALTH.NS, SUMICHEM.NS, SUNDARMFIN.NS, SUNDRMFAST.NS, SUNPHARMA.NS, SUNTV.NS, SUPREMEIND.NS, SUZLON.NS, SWANCORP.NS, SWIGGY.NS, SYNGENE.NS, SYRMA.NS, TARIL.NS, TATACHEM.NS, TATACOMM.NS, TATACONSUM.NS, TATAELXSI.NS, TATAINVEST.NS, TATAPOWER.NS, TATASTEEL.NS
+2025-11-21 16:03:03,772 INFO etl.fetch_price_history - Inserted 1236 rows for SOBHA.NS into DB
+2025-11-21 16:03:06,403 INFO etl.fetch_price_history - Inserted 1237 rows for SOLARINDS.NS into DB
+2025-11-21 16:03:09,443 INFO etl.fetch_price_history - Inserted 1093 rows for SONACOMS.NS into DB
+2025-11-21 16:03:11,738 INFO etl.fetch_price_history - Inserted 1237 rows for SONATSOFTW.NS into DB
+2025-11-21 16:03:14,967 INFO etl.fetch_price_history - Inserted 1236 rows for SRF.NS into DB
+2025-11-21 16:03:17,201 INFO etl.fetch_price_history - Inserted 977 rows for STARHEALTH.NS into DB
+2025-11-21 16:03:20,048 INFO etl.fetch_price_history - Inserted 1237 rows for SUMICHEM.NS into DB
+2025-11-21 16:03:22,357 INFO etl.fetch_price_history - Inserted 1237 rows for SUNDARMFIN.NS into DB
+2025-11-21 16:03:25,361 INFO etl.fetch_price_history - Inserted 1236 rows for SUNDRMFAST.NS into DB
+2025-11-21 16:03:27,726 INFO etl.fetch_price_history - Inserted 1237 rows for SUNPHARMA.NS into DB
+2025-11-21 16:03:30,895 INFO etl.fetch_price_history - Inserted 1237 rows for SUNTV.NS into DB
+2025-11-21 16:03:33,540 INFO etl.fetch_price_history - Inserted 1237 rows for SUPREMEIND.NS into DB
+2025-11-21 16:03:36,019 INFO etl.fetch_price_history - Inserted 1237 rows for SUZLON.NS into DB
+2025-11-21 16:03:40,730 INFO etl.fetch_price_history - Inserted 1237 rows for SWANCORP.NS into DB
+2025-11-21 16:03:41,223 INFO etl.fetch_price_history - Inserted 255 rows for SWIGGY.NS into DB
+2025-11-21 16:03:43,356 INFO etl.fetch_price_history - Inserted 1237 rows for SYNGENE.NS into DB
+2025-11-21 16:03:45,184 INFO etl.fetch_price_history - Inserted 801 rows for SYRMA.NS into DB
+2025-11-21 16:03:47,383 INFO etl.fetch_price_history - Inserted 1236 rows for TARIL.NS into DB
+2025-11-21 16:03:49,579 INFO etl.fetch_price_history - Inserted 1237 rows for TATACHEM.NS into DB
+2025-11-21 16:03:51,848 INFO etl.fetch_price_history - Inserted 1236 rows for TATACOMM.NS into DB
+2025-11-21 16:03:54,090 INFO etl.fetch_price_history - Inserted 1237 rows for TATACONSUM.NS into DB
+2025-11-21 16:03:56,346 INFO etl.fetch_price_history - Inserted 1237 rows for TATAELXSI.NS into DB
+2025-11-21 16:03:58,665 INFO etl.fetch_price_history - Inserted 1237 rows for TATAINVEST.NS into DB
+2025-11-21 16:04:01,654 INFO etl.fetch_price_history - Inserted 1237 rows for TATAPOWER.NS into DB
+2025-11-21 16:04:04,331 INFO etl.fetch_price_history - Inserted 1237 rows for TATASTEEL.NS into DB
+2025-11-21 16:04:06,343 INFO etl.fetch_price_history - Processing batch of 25 tickers
+2025-11-21 16:04:06,344 INFO etl.fetch_price_history - Downloading tickers batch: TATATECH.NS, TBOTEK.NS, TCS.NS, TECHM.NS, TECHNOE.NS, TEJASNET.NS, THELEELA.NS, THERMAX.NS, TIINDIA.NS, TIMKEN.NS, TITAGARH.NS, TITAN.NS, TMPV.NS, TORNTPHARM.NS, TORNTPOWER.NS, TRENT.NS, TRIDENT.NS, TRITURBINE.NS, TRIVENI.NS, TTML.NS, TVSMOTOR.NS, UBL.NS, UCOBANK.NS, ULTRACEMCO.NS, UNIONBANK.NS
+2025-11-21 16:04:08,675 INFO etl.fetch_price_history - Inserted 485 rows for TATATECH.NS into DB
+2025-11-21 16:04:09,151 INFO etl.fetch_price_history - Inserted 379 rows for TBOTEK.NS into DB
+2025-11-21 16:04:11,418 INFO etl.fetch_price_history - Inserted 1237 rows for TCS.NS into DB
+2025-11-21 16:04:13,457 INFO etl.fetch_price_history - Inserted 1237 rows for TECHM.NS into DB
+2025-11-21 16:04:16,200 INFO etl.fetch_price_history - Inserted 1237 rows for TECHNOE.NS into DB
+2025-11-21 16:04:19,093 INFO etl.fetch_price_history - Inserted 1237 rows for TEJASNET.NS into DB
+2025-11-21 16:04:19,422 INFO etl.fetch_price_history - Inserted 119 rows for THELEELA.NS into DB
+2025-11-21 16:04:21,417 INFO etl.fetch_price_history - Inserted 1237 rows for THERMAX.NS into DB
+2025-11-21 16:04:24,200 INFO etl.fetch_price_history - Inserted 1237 rows for TIINDIA.NS into DB
+2025-11-21 16:04:26,660 INFO etl.fetch_price_history - Inserted 1237 rows for TIMKEN.NS into DB
+2025-11-21 16:04:29,488 INFO etl.fetch_price_history - Inserted 1237 rows for TITAGARH.NS into DB
+2025-11-21 16:04:31,739 INFO etl.fetch_price_history - Inserted 1237 rows for TITAN.NS into DB
+2025-11-21 16:04:31,854 INFO etl.fetch_price_history - Inserted 26 rows for TMPV.NS into DB
+2025-11-21 16:04:34,120 INFO etl.fetch_price_history - Inserted 1237 rows for TORNTPHARM.NS into DB
+2025-11-21 16:04:36,261 INFO etl.fetch_price_history - Inserted 1237 rows for TORNTPOWER.NS into DB
+2025-11-21 16:04:38,422 INFO etl.fetch_price_history - Inserted 1237 rows for TRENT.NS into DB
+2025-11-21 16:04:40,413 INFO etl.fetch_price_history - Inserted 1237 rows for TRIDENT.NS into DB
+2025-11-21 16:04:42,947 INFO etl.fetch_price_history - Inserted 1237 rows for TRITURBINE.NS into DB
+2025-11-21 16:04:45,314 INFO etl.fetch_price_history - Inserted 1237 rows for TRIVENI.NS into DB
+2025-11-21 16:04:47,715 INFO etl.fetch_price_history - Inserted 1237 rows for TTML.NS into DB
+2025-11-21 16:04:49,669 INFO etl.fetch_price_history - Inserted 1237 rows for TVSMOTOR.NS into DB
+2025-11-21 16:04:52,432 INFO etl.fetch_price_history - Inserted 1237 rows for UBL.NS into DB
+2025-11-21 16:04:54,295 INFO etl.fetch_price_history - Inserted 1237 rows for UCOBANK.NS into DB
+2025-11-21 16:04:57,349 INFO etl.fetch_price_history - Inserted 1237 rows for ULTRACEMCO.NS into DB
+2025-11-21 16:04:59,381 INFO etl.fetch_price_history - Inserted 1237 rows for UNIONBANK.NS into DB
+2025-11-21 16:05:01,385 INFO etl.fetch_price_history - Processing batch of 25 tickers
+2025-11-21 16:05:01,386 INFO etl.fetch_price_history - Downloading tickers batch: UNITDSPR.NS, UNOMINDA.NS, UPL.NS, USHAMART.NS, UTIAMC.NS, VBL.NS, VEDL.NS, VENTIVE.NS, VGUARD.NS, VIJAYA.NS, VMM.NS, VOLTAS.NS, VTL.NS, WAAREEENER.NS, WELCORP.NS, WELSPUNLIV.NS, WHIRLPOOL.NS, WIPRO.NS, WOCKPHARMA.NS, YESBANK.NS, ZEEL.NS, ZENSARTECH.NS, ZENTEC.NS, ZFCVINDIA.NS, ZYDUSLIFE.NS
+2025-11-21 16:05:03,264 INFO etl.fetch_price_history - Inserted 366 rows for UNITDSPR.NS into DB
+2025-11-21 16:05:05,423 INFO etl.fetch_price_history - Inserted 1237 rows for UNOMINDA.NS into DB
+2025-11-21 16:05:07,526 INFO etl.fetch_price_history - Inserted 1237 rows for UPL.NS into DB
+2025-11-21 16:05:09,473 INFO etl.fetch_price_history - Inserted 1237 rows for USHAMART.NS into DB
+2025-11-21 16:05:11,167 INFO etl.fetch_price_history - Inserted 1237 rows for UTIAMC.NS into DB
+2025-11-21 16:05:13,276 INFO etl.fetch_price_history - Inserted 1237 rows for VBL.NS into DB
+2025-11-21 16:05:15,599 INFO etl.fetch_price_history - Inserted 1237 rows for VEDL.NS into DB
+2025-11-21 16:05:15,986 INFO etl.fetch_price_history - Inserted 224 rows for VENTIVE.NS into DB
+2025-11-21 16:05:18,164 INFO etl.fetch_price_history - Inserted 1237 rows for VGUARD.NS into DB
+2025-11-21 16:05:19,841 INFO etl.fetch_price_history - Inserted 1038 rows for VIJAYA.NS into DB
+2025-11-21 16:05:20,467 INFO etl.fetch_price_history - Inserted 232 rows for VMM.NS into DB
+2025-11-21 16:05:22,875 INFO etl.fetch_price_history - Inserted 1237 rows for VOLTAS.NS into DB
+2025-11-21 16:05:25,317 INFO etl.fetch_price_history - Inserted 1237 rows for VTL.NS into DB
+2025-11-21 16:05:25,698 INFO etl.fetch_price_history - Inserted 267 rows for WAAREEENER.NS into DB
+2025-11-21 16:05:28,131 INFO etl.fetch_price_history - Inserted 1237 rows for WELCORP.NS into DB
+2025-11-21 16:05:30,362 INFO etl.fetch_price_history - Inserted 1237 rows for WELSPUNLIV.NS into DB
+2025-11-21 16:05:32,161 INFO etl.fetch_price_history - Inserted 1237 rows for WHIRLPOOL.NS into DB
+2025-11-21 16:05:34,358 INFO etl.fetch_price_history - Inserted 1237 rows for WIPRO.NS into DB
+2025-11-21 16:05:36,525 INFO etl.fetch_price_history - Inserted 1237 rows for WOCKPHARMA.NS into DB
+2025-11-21 16:05:39,295 INFO etl.fetch_price_history - Inserted 1237 rows for YESBANK.NS into DB
+2025-11-21 16:05:41,972 INFO etl.fetch_price_history - Inserted 1237 rows for ZEEL.NS into DB
+2025-11-21 16:05:44,353 INFO etl.fetch_price_history - Inserted 1237 rows for ZENSARTECH.NS into DB
+2025-11-21 16:05:46,702 INFO etl.fetch_price_history - Inserted 1237 rows for ZENTEC.NS into DB
+2025-11-21 16:05:48,915 INFO etl.fetch_price_history - Inserted 1237 rows for ZFCVINDIA.NS into DB
+2025-11-21 16:05:51,065 INFO etl.fetch_price_history - Inserted 1237 rows for ZYDUSLIFE.NS into DB
+2025-11-21 16:05:53,146 INFO etl.fetch_price_history - ETL finished. Total rows inserted: 550454
+2025-11-21 17:34:42,451 INFO etl.fetch_company_metadata - Starting metadata fetch for 500 symbols
+2025-11-21 17:34:44,827 INFO etl.fetch_company_metadata - Updated company id=1 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:34:46,521 INFO etl.fetch_company_metadata - Updated company id=2 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:34:48,232 INFO etl.fetch_company_metadata - Updated company id=3 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:34:49,889 INFO etl.fetch_company_metadata - Updated company id=4 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:34:51,531 INFO etl.fetch_company_metadata - Updated company id=5 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:34:53,178 INFO etl.fetch_company_metadata - Updated company id=6 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:34:54,875 INFO etl.fetch_company_metadata - Updated company id=7 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:34:56,521 INFO etl.fetch_company_metadata - Updated company id=8 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:34:58,177 INFO etl.fetch_company_metadata - Updated company id=9 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:34:59,931 INFO etl.fetch_company_metadata - Updated company id=10 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:35:01,584 INFO etl.fetch_company_metadata - Updated company id=11 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:35:03,369 INFO etl.fetch_company_metadata - Updated company id=12 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:35:06,268 INFO etl.fetch_company_metadata - Updated company id=13 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:35:07,964 INFO etl.fetch_company_metadata - Updated company id=14 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:35:09,653 INFO etl.fetch_company_metadata - Updated company id=15 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:35:11,414 INFO etl.fetch_company_metadata - Updated company id=16 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:35:13,233 INFO etl.fetch_company_metadata - Updated company id=17 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:35:15,025 INFO etl.fetch_company_metadata - Updated company id=18 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:35:16,735 INFO etl.fetch_company_metadata - Updated company id=19 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:35:18,526 INFO etl.fetch_company_metadata - Updated company id=20 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:35:20,320 INFO etl.fetch_company_metadata - Updated company id=21 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:35:22,094 INFO etl.fetch_company_metadata - Updated company id=22 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:35:23,981 INFO etl.fetch_company_metadata - Updated company id=23 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:35:25,672 INFO etl.fetch_company_metadata - Updated company id=24 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:35:27,382 INFO etl.fetch_company_metadata - Updated company id=25 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:35:29,164 INFO etl.fetch_company_metadata - Updated company id=26 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:35:30,980 INFO etl.fetch_company_metadata - Updated company id=27 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:35:32,688 INFO etl.fetch_company_metadata - Updated company id=28 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:35:34,428 INFO etl.fetch_company_metadata - Updated company id=29 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:35:36,160 INFO etl.fetch_company_metadata - Updated company id=30 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:35:37,916 INFO etl.fetch_company_metadata - Updated company id=31 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:35:39,687 INFO etl.fetch_company_metadata - Updated company id=32 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:35:41,341 INFO etl.fetch_company_metadata - Updated company id=33 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:35:43,051 INFO etl.fetch_company_metadata - Updated company id=34 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:35:44,695 INFO etl.fetch_company_metadata - Updated company id=35 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:35:46,421 INFO etl.fetch_company_metadata - Updated company id=36 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:35:48,132 INFO etl.fetch_company_metadata - Updated company id=37 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:35:49,973 INFO etl.fetch_company_metadata - Updated company id=38 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:35:51,663 INFO etl.fetch_company_metadata - Updated company id=39 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:35:53,345 INFO etl.fetch_company_metadata - Updated company id=40 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:35:54,997 INFO etl.fetch_company_metadata - Updated company id=41 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:35:56,681 INFO etl.fetch_company_metadata - Updated company id=42 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:35:58,464 INFO etl.fetch_company_metadata - Updated company id=43 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:36:00,169 INFO etl.fetch_company_metadata - Updated company id=44 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:36:02,301 INFO etl.fetch_company_metadata - Updated company id=45 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:36:04,075 INFO etl.fetch_company_metadata - Updated company id=46 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:36:05,936 INFO etl.fetch_company_metadata - Updated company id=47 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:36:07,624 INFO etl.fetch_company_metadata - Updated company id=48 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:36:09,299 INFO etl.fetch_company_metadata - Updated company id=49 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:36:11,134 INFO etl.fetch_company_metadata - Updated company id=50 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:36:12,930 INFO etl.fetch_company_metadata - Updated company id=51 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:36:14,608 INFO etl.fetch_company_metadata - Updated company id=52 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:36:16,321 INFO etl.fetch_company_metadata - Updated company id=53 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:36:18,019 INFO etl.fetch_company_metadata - Updated company id=54 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:36:19,843 INFO etl.fetch_company_metadata - Updated company id=55 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:36:21,592 INFO etl.fetch_company_metadata - Updated company id=56 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:36:23,281 INFO etl.fetch_company_metadata - Updated company id=57 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:36:24,992 INFO etl.fetch_company_metadata - Updated company id=58 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:36:26,846 INFO etl.fetch_company_metadata - Updated company id=59 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:36:28,673 INFO etl.fetch_company_metadata - Updated company id=60 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:36:30,341 INFO etl.fetch_company_metadata - Updated company id=61 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:36:31,993 INFO etl.fetch_company_metadata - Updated company id=62 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:36:33,713 INFO etl.fetch_company_metadata - Updated company id=63 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:36:35,422 INFO etl.fetch_company_metadata - Updated company id=64 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:36:37,198 INFO etl.fetch_company_metadata - Updated company id=65 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:36:38,859 INFO etl.fetch_company_metadata - Updated company id=66 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:36:40,711 INFO etl.fetch_company_metadata - Updated company id=67 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:36:42,384 INFO etl.fetch_company_metadata - Updated company id=68 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:36:44,118 INFO etl.fetch_company_metadata - Updated company id=69 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:36:45,771 INFO etl.fetch_company_metadata - Updated company id=70 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:36:47,441 INFO etl.fetch_company_metadata - Updated company id=71 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:36:49,148 INFO etl.fetch_company_metadata - Updated company id=72 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:36:50,815 INFO etl.fetch_company_metadata - Updated company id=73 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:36:52,505 INFO etl.fetch_company_metadata - Updated company id=74 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:36:54,315 INFO etl.fetch_company_metadata - Updated company id=75 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:36:56,157 INFO etl.fetch_company_metadata - Updated company id=76 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:36:57,814 INFO etl.fetch_company_metadata - Updated company id=77 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:36:59,570 INFO etl.fetch_company_metadata - Updated company id=78 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:37:01,356 INFO etl.fetch_company_metadata - Updated company id=79 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:37:03,023 INFO etl.fetch_company_metadata - Updated company id=80 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:37:04,823 INFO etl.fetch_company_metadata - Updated company id=81 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:37:06,548 INFO etl.fetch_company_metadata - Updated company id=82 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:37:08,243 INFO etl.fetch_company_metadata - Updated company id=83 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:37:09,920 INFO etl.fetch_company_metadata - Updated company id=84 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:37:11,690 INFO etl.fetch_company_metadata - Updated company id=85 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:37:13,392 INFO etl.fetch_company_metadata - Updated company id=86 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:37:15,424 INFO etl.fetch_company_metadata - Updated company id=87 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:37:17,059 INFO etl.fetch_company_metadata - Updated company id=88 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:37:18,706 INFO etl.fetch_company_metadata - Updated company id=89 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:37:20,458 INFO etl.fetch_company_metadata - Updated company id=90 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:37:22,194 INFO etl.fetch_company_metadata - Updated company id=91 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:37:23,865 INFO etl.fetch_company_metadata - Updated company id=92 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:37:25,730 INFO etl.fetch_company_metadata - Updated company id=93 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:37:27,367 INFO etl.fetch_company_metadata - Updated company id=94 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:37:29,238 INFO etl.fetch_company_metadata - Updated company id=95 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:37:30,882 INFO etl.fetch_company_metadata - Updated company id=96 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:37:32,530 INFO etl.fetch_company_metadata - Updated company id=97 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:37:34,272 INFO etl.fetch_company_metadata - Updated company id=98 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:37:35,949 INFO etl.fetch_company_metadata - Updated company id=99 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:37:37,809 INFO etl.fetch_company_metadata - Updated company id=100 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:37:39,572 INFO etl.fetch_company_metadata - Updated company id=101 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:37:41,237 INFO etl.fetch_company_metadata - Updated company id=102 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:37:43,057 INFO etl.fetch_company_metadata - Updated company id=103 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:37:44,753 INFO etl.fetch_company_metadata - Updated company id=104 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:37:46,463 INFO etl.fetch_company_metadata - Updated company id=105 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:37:48,246 INFO etl.fetch_company_metadata - Updated company id=106 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:37:50,079 INFO etl.fetch_company_metadata - Updated company id=107 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:37:51,731 INFO etl.fetch_company_metadata - Updated company id=108 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:37:53,471 INFO etl.fetch_company_metadata - Updated company id=109 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:37:55,285 INFO etl.fetch_company_metadata - Updated company id=110 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:37:56,963 INFO etl.fetch_company_metadata - Updated company id=111 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:37:58,645 INFO etl.fetch_company_metadata - Updated company id=112 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:38:00,295 INFO etl.fetch_company_metadata - Updated company id=113 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:38:01,926 INFO etl.fetch_company_metadata - Updated company id=114 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:38:03,750 INFO etl.fetch_company_metadata - Updated company id=115 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:38:05,481 INFO etl.fetch_company_metadata - Updated company id=116 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:38:07,267 INFO etl.fetch_company_metadata - Updated company id=117 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:38:08,913 INFO etl.fetch_company_metadata - Updated company id=118 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:38:10,826 INFO etl.fetch_company_metadata - Updated company id=119 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:38:12,558 INFO etl.fetch_company_metadata - Updated company id=120 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:38:14,403 INFO etl.fetch_company_metadata - Updated company id=121 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:38:16,171 INFO etl.fetch_company_metadata - Updated company id=122 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:38:18,179 INFO etl.fetch_company_metadata - Updated company id=123 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:38:19,910 INFO etl.fetch_company_metadata - Updated company id=124 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:38:21,573 INFO etl.fetch_company_metadata - Updated company id=125 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:38:23,224 INFO etl.fetch_company_metadata - Updated company id=126 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:38:24,957 INFO etl.fetch_company_metadata - Updated company id=127 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:38:26,745 INFO etl.fetch_company_metadata - Updated company id=128 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:38:28,530 INFO etl.fetch_company_metadata - Updated company id=129 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:38:30,206 INFO etl.fetch_company_metadata - Updated company id=130 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:38:32,133 INFO etl.fetch_company_metadata - Updated company id=131 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:38:33,910 INFO etl.fetch_company_metadata - Updated company id=132 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:38:35,715 INFO etl.fetch_company_metadata - Updated company id=133 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:38:37,406 INFO etl.fetch_company_metadata - Updated company id=134 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:38:39,076 INFO etl.fetch_company_metadata - Updated company id=135 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:38:40,851 INFO etl.fetch_company_metadata - Updated company id=136 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:38:42,573 INFO etl.fetch_company_metadata - Updated company id=137 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:38:44,387 INFO etl.fetch_company_metadata - Updated company id=138 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:38:46,458 INFO etl.fetch_company_metadata - Updated company id=139 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:38:48,233 INFO etl.fetch_company_metadata - Updated company id=140 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:38:50,067 INFO etl.fetch_company_metadata - Updated company id=141 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:38:51,820 INFO etl.fetch_company_metadata - Updated company id=142 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:38:53,725 INFO etl.fetch_company_metadata - Updated company id=143 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:38:55,465 INFO etl.fetch_company_metadata - Updated company id=144 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:38:57,291 INFO etl.fetch_company_metadata - Updated company id=145 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:38:59,157 INFO etl.fetch_company_metadata - Updated company id=146 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:39:00,917 INFO etl.fetch_company_metadata - Updated company id=147 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:39:02,717 INFO etl.fetch_company_metadata - Updated company id=148 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:39:04,467 INFO etl.fetch_company_metadata - Updated company id=149 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:39:06,287 INFO etl.fetch_company_metadata - Updated company id=150 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:39:08,228 INFO etl.fetch_company_metadata - Updated company id=151 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:39:10,022 INFO etl.fetch_company_metadata - Updated company id=152 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:39:11,768 INFO etl.fetch_company_metadata - Updated company id=153 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:39:13,465 INFO etl.fetch_company_metadata - Updated company id=154 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:39:15,307 INFO etl.fetch_company_metadata - Updated company id=155 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:39:17,254 INFO etl.fetch_company_metadata - Updated company id=156 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:39:19,167 INFO etl.fetch_company_metadata - Updated company id=157 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:39:20,910 INFO etl.fetch_company_metadata - Updated company id=158 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:39:22,634 INFO etl.fetch_company_metadata - Updated company id=159 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:39:24,492 INFO etl.fetch_company_metadata - Updated company id=160 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:39:26,249 INFO etl.fetch_company_metadata - Updated company id=161 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:39:28,128 INFO etl.fetch_company_metadata - Updated company id=162 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:39:30,028 INFO etl.fetch_company_metadata - Updated company id=163 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:39:31,772 INFO etl.fetch_company_metadata - Updated company id=164 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:39:33,424 INFO etl.fetch_company_metadata - Updated company id=165 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:39:35,157 INFO etl.fetch_company_metadata - Updated company id=166 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:39:36,981 INFO etl.fetch_company_metadata - Updated company id=167 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:39:38,662 INFO etl.fetch_company_metadata - Updated company id=168 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:39:40,297 INFO etl.fetch_company_metadata - Updated company id=169 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:39:51,249 INFO etl.fetch_company_metadata - Updated company id=170 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:39:53,039 INFO etl.fetch_company_metadata - Updated company id=171 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:39:54,791 INFO etl.fetch_company_metadata - Updated company id=172 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:39:56,633 INFO etl.fetch_company_metadata - Updated company id=173 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:39:58,421 INFO etl.fetch_company_metadata - Updated company id=174 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:40:00,189 INFO etl.fetch_company_metadata - Updated company id=175 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:40:01,973 INFO etl.fetch_company_metadata - Updated company id=176 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:40:03,777 INFO etl.fetch_company_metadata - Updated company id=177 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:40:05,647 INFO etl.fetch_company_metadata - Updated company id=178 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:40:07,663 INFO etl.fetch_company_metadata - Updated company id=179 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:40:09,529 INFO etl.fetch_company_metadata - Updated company id=180 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:40:11,255 INFO etl.fetch_company_metadata - Updated company id=181 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:40:13,107 INFO etl.fetch_company_metadata - Updated company id=182 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:40:14,847 INFO etl.fetch_company_metadata - Updated company id=183 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:40:16,591 INFO etl.fetch_company_metadata - Updated company id=184 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:40:18,355 INFO etl.fetch_company_metadata - Updated company id=185 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:40:20,099 INFO etl.fetch_company_metadata - Updated company id=186 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:40:21,847 INFO etl.fetch_company_metadata - Updated company id=187 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:40:23,536 INFO etl.fetch_company_metadata - Updated company id=188 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:40:25,257 INFO etl.fetch_company_metadata - Updated company id=189 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:40:27,199 INFO etl.fetch_company_metadata - Updated company id=190 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:40:28,937 INFO etl.fetch_company_metadata - Updated company id=191 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:40:30,785 INFO etl.fetch_company_metadata - Updated company id=192 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:40:32,456 INFO etl.fetch_company_metadata - Updated company id=193 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:40:34,156 INFO etl.fetch_company_metadata - Updated company id=194 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:40:35,802 INFO etl.fetch_company_metadata - Updated company id=195 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:40:37,555 INFO etl.fetch_company_metadata - Updated company id=196 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:40:39,294 INFO etl.fetch_company_metadata - Updated company id=197 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:40:41,126 INFO etl.fetch_company_metadata - Updated company id=198 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:40:42,795 INFO etl.fetch_company_metadata - Updated company id=199 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:40:44,549 INFO etl.fetch_company_metadata - Updated company id=200 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:40:46,268 INFO etl.fetch_company_metadata - Updated company id=201 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:40:47,948 INFO etl.fetch_company_metadata - Updated company id=202 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:40:49,620 INFO etl.fetch_company_metadata - Updated company id=203 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:40:51,331 INFO etl.fetch_company_metadata - Updated company id=204 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:40:53,085 INFO etl.fetch_company_metadata - Updated company id=205 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:40:55,002 INFO etl.fetch_company_metadata - Updated company id=206 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:40:56,775 INFO etl.fetch_company_metadata - Updated company id=207 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:40:58,558 INFO etl.fetch_company_metadata - Updated company id=208 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:41:00,360 INFO etl.fetch_company_metadata - Updated company id=209 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:41:02,102 INFO etl.fetch_company_metadata - Updated company id=210 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:41:03,746 INFO etl.fetch_company_metadata - Updated company id=211 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:41:05,424 INFO etl.fetch_company_metadata - Updated company id=212 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:41:07,130 INFO etl.fetch_company_metadata - Updated company id=213 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:41:08,780 INFO etl.fetch_company_metadata - Updated company id=214 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:41:10,497 INFO etl.fetch_company_metadata - Updated company id=215 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:41:12,320 INFO etl.fetch_company_metadata - Updated company id=216 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:41:14,010 INFO etl.fetch_company_metadata - Updated company id=217 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:41:15,710 INFO etl.fetch_company_metadata - Updated company id=218 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:41:17,375 INFO etl.fetch_company_metadata - Updated company id=219 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:41:19,137 INFO etl.fetch_company_metadata - Updated company id=220 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:41:20,817 INFO etl.fetch_company_metadata - Updated company id=221 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:41:22,776 INFO etl.fetch_company_metadata - Updated company id=222 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:41:26,343 INFO etl.fetch_company_metadata - Updated company id=223 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:41:28,145 INFO etl.fetch_company_metadata - Updated company id=224 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:41:29,911 INFO etl.fetch_company_metadata - Updated company id=225 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:41:31,668 INFO etl.fetch_company_metadata - Updated company id=226 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:41:33,362 INFO etl.fetch_company_metadata - Updated company id=227 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:41:35,275 INFO etl.fetch_company_metadata - Updated company id=228 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:41:37,029 INFO etl.fetch_company_metadata - Updated company id=229 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:41:38,738 INFO etl.fetch_company_metadata - Updated company id=230 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:41:40,400 INFO etl.fetch_company_metadata - Updated company id=231 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:41:42,146 INFO etl.fetch_company_metadata - Updated company id=232 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:41:43,991 INFO etl.fetch_company_metadata - Updated company id=233 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:41:45,736 INFO etl.fetch_company_metadata - Updated company id=234 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:41:47,663 INFO etl.fetch_company_metadata - Updated company id=235 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:41:49,323 INFO etl.fetch_company_metadata - Updated company id=236 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:41:51,098 INFO etl.fetch_company_metadata - Updated company id=237 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:41:52,809 INFO etl.fetch_company_metadata - Updated company id=238 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:41:54,545 INFO etl.fetch_company_metadata - Updated company id=239 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:41:56,270 INFO etl.fetch_company_metadata - Updated company id=240 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:41:58,042 INFO etl.fetch_company_metadata - Updated company id=241 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:41:59,949 INFO etl.fetch_company_metadata - Updated company id=242 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:42:01,755 INFO etl.fetch_company_metadata - Updated company id=243 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:42:03,481 INFO etl.fetch_company_metadata - Updated company id=244 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:42:05,328 INFO etl.fetch_company_metadata - Updated company id=245 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:42:07,126 INFO etl.fetch_company_metadata - Updated company id=246 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:42:08,792 INFO etl.fetch_company_metadata - Updated company id=247 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:42:10,620 INFO etl.fetch_company_metadata - Updated company id=248 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:42:12,357 INFO etl.fetch_company_metadata - Updated company id=249 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:42:14,136 INFO etl.fetch_company_metadata - Updated company id=250 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:42:15,952 INFO etl.fetch_company_metadata - Updated company id=251 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:42:17,651 INFO etl.fetch_company_metadata - Updated company id=252 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:42:19,359 INFO etl.fetch_company_metadata - Updated company id=253 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:42:21,011 INFO etl.fetch_company_metadata - Updated company id=254 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:42:22,682 INFO etl.fetch_company_metadata - Updated company id=255 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:42:24,682 INFO etl.fetch_company_metadata - Updated company id=256 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:42:26,499 INFO etl.fetch_company_metadata - Updated company id=257 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:42:28,213 INFO etl.fetch_company_metadata - Updated company id=258 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:42:30,059 INFO etl.fetch_company_metadata - Updated company id=259 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:42:31,741 INFO etl.fetch_company_metadata - Updated company id=260 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:42:33,494 INFO etl.fetch_company_metadata - Updated company id=261 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:42:35,239 INFO etl.fetch_company_metadata - Updated company id=262 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:42:36,983 INFO etl.fetch_company_metadata - Updated company id=263 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:42:38,663 INFO etl.fetch_company_metadata - Updated company id=264 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:42:40,319 INFO etl.fetch_company_metadata - Updated company id=265 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:42:42,099 INFO etl.fetch_company_metadata - Updated company id=266 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:42:43,874 INFO etl.fetch_company_metadata - Updated company id=267 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:42:45,702 INFO etl.fetch_company_metadata - Updated company id=268 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:42:47,476 INFO etl.fetch_company_metadata - Updated company id=269 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:42:49,213 INFO etl.fetch_company_metadata - Updated company id=270 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:42:51,001 INFO etl.fetch_company_metadata - Updated company id=271 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:42:52,677 INFO etl.fetch_company_metadata - Updated company id=272 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:42:54,422 INFO etl.fetch_company_metadata - Updated company id=273 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:42:56,081 INFO etl.fetch_company_metadata - Updated company id=274 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:42:57,776 INFO etl.fetch_company_metadata - Updated company id=275 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:42:59,413 INFO etl.fetch_company_metadata - Updated company id=276 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:43:01,204 INFO etl.fetch_company_metadata - Updated company id=277 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:43:02,925 INFO etl.fetch_company_metadata - Updated company id=278 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:43:04,631 INFO etl.fetch_company_metadata - Updated company id=279 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:43:06,336 INFO etl.fetch_company_metadata - Updated company id=280 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:43:08,252 INFO etl.fetch_company_metadata - Updated company id=281 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:43:09,924 INFO etl.fetch_company_metadata - Updated company id=282 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:43:11,645 INFO etl.fetch_company_metadata - Updated company id=283 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:43:13,371 INFO etl.fetch_company_metadata - Updated company id=284 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:43:15,013 INFO etl.fetch_company_metadata - Updated company id=285 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:43:16,767 INFO etl.fetch_company_metadata - Updated company id=286 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:43:18,511 INFO etl.fetch_company_metadata - Updated company id=287 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:43:20,174 INFO etl.fetch_company_metadata - Updated company id=288 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:43:21,885 INFO etl.fetch_company_metadata - Updated company id=289 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:43:23,545 INFO etl.fetch_company_metadata - Updated company id=290 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:43:25,413 INFO etl.fetch_company_metadata - Updated company id=291 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:43:27,182 INFO etl.fetch_company_metadata - Updated company id=292 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:43:28,933 INFO etl.fetch_company_metadata - Updated company id=293 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:43:30,760 INFO etl.fetch_company_metadata - Updated company id=294 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:43:32,538 INFO etl.fetch_company_metadata - Updated company id=295 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:43:34,344 INFO etl.fetch_company_metadata - Updated company id=296 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:43:36,080 INFO etl.fetch_company_metadata - Updated company id=297 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:43:37,886 INFO etl.fetch_company_metadata - Updated company id=298 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:43:39,809 INFO etl.fetch_company_metadata - Updated company id=299 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:43:41,539 INFO etl.fetch_company_metadata - Updated company id=300 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:43:43,485 INFO etl.fetch_company_metadata - Updated company id=301 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:43:45,329 INFO etl.fetch_company_metadata - Updated company id=302 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:43:47,049 INFO etl.fetch_company_metadata - Updated company id=303 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:43:48,716 INFO etl.fetch_company_metadata - Updated company id=304 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:43:50,427 INFO etl.fetch_company_metadata - Updated company id=305 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:43:52,138 INFO etl.fetch_company_metadata - Updated company id=306 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:43:53,823 INFO etl.fetch_company_metadata - Updated company id=307 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:43:55,810 INFO etl.fetch_company_metadata - Updated company id=308 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:43:57,654 INFO etl.fetch_company_metadata - Updated company id=309 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:43:59,494 INFO etl.fetch_company_metadata - Updated company id=310 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:44:01,429 INFO etl.fetch_company_metadata - Updated company id=311 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:44:03,168 INFO etl.fetch_company_metadata - Updated company id=312 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:44:04,910 INFO etl.fetch_company_metadata - Updated company id=313 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:44:06,907 INFO etl.fetch_company_metadata - Updated company id=314 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:44:08,698 INFO etl.fetch_company_metadata - Updated company id=315 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:44:10,587 INFO etl.fetch_company_metadata - Updated company id=316 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:44:12,495 INFO etl.fetch_company_metadata - Updated company id=317 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:44:14,385 INFO etl.fetch_company_metadata - Updated company id=318 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:44:16,215 INFO etl.fetch_company_metadata - Updated company id=319 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:44:18,043 INFO etl.fetch_company_metadata - Updated company id=320 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:44:19,771 INFO etl.fetch_company_metadata - Updated company id=321 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:44:21,532 INFO etl.fetch_company_metadata - Updated company id=322 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:44:23,389 INFO etl.fetch_company_metadata - Updated company id=323 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:44:25,214 INFO etl.fetch_company_metadata - Updated company id=324 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:44:26,874 INFO etl.fetch_company_metadata - Updated company id=325 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:44:28,634 INFO etl.fetch_company_metadata - Updated company id=326 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:44:30,311 INFO etl.fetch_company_metadata - Updated company id=327 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:44:31,966 INFO etl.fetch_company_metadata - Updated company id=328 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:44:33,675 INFO etl.fetch_company_metadata - Updated company id=329 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:44:35,361 INFO etl.fetch_company_metadata - Updated company id=330 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:44:37,085 INFO etl.fetch_company_metadata - Updated company id=331 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:44:38,857 INFO etl.fetch_company_metadata - Updated company id=332 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:44:40,578 INFO etl.fetch_company_metadata - Updated company id=333 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:44:42,326 INFO etl.fetch_company_metadata - Updated company id=334 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:44:44,063 INFO etl.fetch_company_metadata - Updated company id=335 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:44:45,801 INFO etl.fetch_company_metadata - Updated company id=336 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:44:47,574 INFO etl.fetch_company_metadata - Updated company id=337 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:44:49,267 INFO etl.fetch_company_metadata - Updated company id=338 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:44:50,945 INFO etl.fetch_company_metadata - Updated company id=339 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:44:52,833 INFO etl.fetch_company_metadata - Updated company id=340 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:44:54,645 INFO etl.fetch_company_metadata - Updated company id=341 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:44:56,350 INFO etl.fetch_company_metadata - Updated company id=342 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:44:58,187 INFO etl.fetch_company_metadata - Updated company id=343 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:44:59,975 INFO etl.fetch_company_metadata - Updated company id=344 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:45:22,179 INFO etl.fetch_company_metadata - Updated company id=346 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:45:23,882 INFO etl.fetch_company_metadata - Updated company id=347 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:45:25,538 INFO etl.fetch_company_metadata - Updated company id=348 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:45:27,333 INFO etl.fetch_company_metadata - Updated company id=349 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:45:29,008 INFO etl.fetch_company_metadata - Updated company id=350 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:45:30,800 INFO etl.fetch_company_metadata - Updated company id=351 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:45:32,731 INFO etl.fetch_company_metadata - Updated company id=352 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:45:34,552 INFO etl.fetch_company_metadata - Updated company id=353 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:45:36,261 INFO etl.fetch_company_metadata - Updated company id=354 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:45:38,108 INFO etl.fetch_company_metadata - Updated company id=355 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:45:39,807 INFO etl.fetch_company_metadata - Updated company id=356 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:45:41,509 INFO etl.fetch_company_metadata - Updated company id=357 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:45:43,299 INFO etl.fetch_company_metadata - Updated company id=358 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:45:45,072 INFO etl.fetch_company_metadata - Updated company id=359 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:45:46,732 INFO etl.fetch_company_metadata - Updated company id=360 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:45:48,634 INFO etl.fetch_company_metadata - Updated company id=361 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:45:50,410 INFO etl.fetch_company_metadata - Updated company id=362 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:45:52,112 INFO etl.fetch_company_metadata - Updated company id=363 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:45:53,767 INFO etl.fetch_company_metadata - Updated company id=364 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:45:55,571 INFO etl.fetch_company_metadata - Updated company id=365 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:45:57,360 INFO etl.fetch_company_metadata - Updated company id=366 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:45:59,060 INFO etl.fetch_company_metadata - Updated company id=367 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:46:00,719 INFO etl.fetch_company_metadata - Updated company id=368 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:46:02,375 INFO etl.fetch_company_metadata - Updated company id=369 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:46:04,066 INFO etl.fetch_company_metadata - Updated company id=370 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:46:05,787 INFO etl.fetch_company_metadata - Updated company id=371 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:46:07,483 INFO etl.fetch_company_metadata - Updated company id=372 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:46:09,143 INFO etl.fetch_company_metadata - Updated company id=373 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:46:10,777 INFO etl.fetch_company_metadata - Updated company id=374 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:46:12,519 INFO etl.fetch_company_metadata - Updated company id=375 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:46:14,272 INFO etl.fetch_company_metadata - Updated company id=376 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:46:16,072 INFO etl.fetch_company_metadata - Updated company id=377 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:46:17,776 INFO etl.fetch_company_metadata - Updated company id=378 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:46:19,545 INFO etl.fetch_company_metadata - Updated company id=379 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:46:21,236 INFO etl.fetch_company_metadata - Updated company id=380 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:46:22,895 INFO etl.fetch_company_metadata - Updated company id=381 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:46:24,577 INFO etl.fetch_company_metadata - Updated company id=382 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:46:26,321 INFO etl.fetch_company_metadata - Updated company id=383 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:46:27,976 INFO etl.fetch_company_metadata - Updated company id=384 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:46:29,698 INFO etl.fetch_company_metadata - Updated company id=385 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:46:31,359 INFO etl.fetch_company_metadata - Updated company id=386 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:46:33,117 INFO etl.fetch_company_metadata - Updated company id=387 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:46:34,933 INFO etl.fetch_company_metadata - Updated company id=388 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:46:36,625 INFO etl.fetch_company_metadata - Updated company id=389 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:46:38,299 INFO etl.fetch_company_metadata - Updated company id=390 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:46:40,115 INFO etl.fetch_company_metadata - Updated company id=391 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:46:41,918 INFO etl.fetch_company_metadata - Updated company id=392 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:46:43,651 INFO etl.fetch_company_metadata - Updated company id=393 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:46:45,342 INFO etl.fetch_company_metadata - Updated company id=394 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:46:47,163 INFO etl.fetch_company_metadata - Updated company id=395 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:46:48,969 INFO etl.fetch_company_metadata - Updated company id=396 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:46:50,752 INFO etl.fetch_company_metadata - Updated company id=397 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:46:52,446 INFO etl.fetch_company_metadata - Updated company id=398 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:46:54,142 INFO etl.fetch_company_metadata - Updated company id=399 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:46:55,901 INFO etl.fetch_company_metadata - Updated company id=400 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:46:58,006 INFO etl.fetch_company_metadata - Updated company id=401 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:46:59,803 INFO etl.fetch_company_metadata - Updated company id=402 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:47:01,452 INFO etl.fetch_company_metadata - Updated company id=403 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:47:03,229 INFO etl.fetch_company_metadata - Updated company id=404 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:47:04,940 INFO etl.fetch_company_metadata - Updated company id=405 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:47:06,622 INFO etl.fetch_company_metadata - Updated company id=406 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:47:08,317 INFO etl.fetch_company_metadata - Updated company id=407 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:47:10,114 INFO etl.fetch_company_metadata - Updated company id=408 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:47:11,933 INFO etl.fetch_company_metadata - Updated company id=409 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:47:13,733 INFO etl.fetch_company_metadata - Updated company id=410 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:47:15,565 INFO etl.fetch_company_metadata - Updated company id=411 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:47:17,302 INFO etl.fetch_company_metadata - Updated company id=412 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:47:19,131 INFO etl.fetch_company_metadata - Updated company id=413 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:47:20,791 INFO etl.fetch_company_metadata - Updated company id=414 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:47:22,513 INFO etl.fetch_company_metadata - Updated company id=415 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:47:24,393 INFO etl.fetch_company_metadata - Updated company id=416 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:47:26,051 INFO etl.fetch_company_metadata - Updated company id=417 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:47:27,810 INFO etl.fetch_company_metadata - Updated company id=418 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:47:29,694 INFO etl.fetch_company_metadata - Updated company id=419 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:47:31,417 INFO etl.fetch_company_metadata - Updated company id=420 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:47:33,165 INFO etl.fetch_company_metadata - Updated company id=421 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:47:34,838 INFO etl.fetch_company_metadata - Updated company id=422 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:47:36,586 INFO etl.fetch_company_metadata - Updated company id=423 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:47:38,528 INFO etl.fetch_company_metadata - Updated company id=424 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:47:40,216 INFO etl.fetch_company_metadata - Updated company id=425 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:47:41,928 INFO etl.fetch_company_metadata - Updated company id=426 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:47:43,682 INFO etl.fetch_company_metadata - Updated company id=427 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:47:45,568 INFO etl.fetch_company_metadata - Updated company id=428 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:47:47,224 INFO etl.fetch_company_metadata - Updated company id=429 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:47:48,902 INFO etl.fetch_company_metadata - Updated company id=430 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:47:50,634 INFO etl.fetch_company_metadata - Updated company id=431 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:47:52,430 INFO etl.fetch_company_metadata - Updated company id=432 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:47:54,071 INFO etl.fetch_company_metadata - Updated company id=433 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:47:55,799 INFO etl.fetch_company_metadata - Updated company id=434 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:47:57,568 INFO etl.fetch_company_metadata - Updated company id=435 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:47:59,224 INFO etl.fetch_company_metadata - Updated company id=436 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:48:01,074 INFO etl.fetch_company_metadata - Updated company id=437 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:48:02,866 INFO etl.fetch_company_metadata - Updated company id=438 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:48:04,718 INFO etl.fetch_company_metadata - Updated company id=439 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:48:06,386 INFO etl.fetch_company_metadata - Updated company id=440 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:48:08,059 INFO etl.fetch_company_metadata - Updated company id=441 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:48:09,752 INFO etl.fetch_company_metadata - Updated company id=442 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:48:11,469 INFO etl.fetch_company_metadata - Updated company id=443 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:48:13,829 INFO etl.fetch_company_metadata - Updated company id=444 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:48:15,531 INFO etl.fetch_company_metadata - Updated company id=445 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:48:17,304 INFO etl.fetch_company_metadata - Updated company id=446 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:48:18,955 INFO etl.fetch_company_metadata - Updated company id=447 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:48:20,599 INFO etl.fetch_company_metadata - Updated company id=448 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:48:22,399 INFO etl.fetch_company_metadata - Updated company id=449 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:48:24,087 INFO etl.fetch_company_metadata - Updated company id=450 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:48:25,941 INFO etl.fetch_company_metadata - Updated company id=451 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:48:27,755 INFO etl.fetch_company_metadata - Updated company id=452 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:48:29,586 INFO etl.fetch_company_metadata - Updated company id=453 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:48:31,301 INFO etl.fetch_company_metadata - Updated company id=454 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:48:33,129 INFO etl.fetch_company_metadata - Updated company id=455 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:48:34,861 INFO etl.fetch_company_metadata - Updated company id=456 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:48:36,616 INFO etl.fetch_company_metadata - Updated company id=457 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:48:38,268 INFO etl.fetch_company_metadata - Updated company id=458 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:48:39,992 INFO etl.fetch_company_metadata - Updated company id=459 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:48:41,671 INFO etl.fetch_company_metadata - Updated company id=460 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:48:43,414 INFO etl.fetch_company_metadata - Updated company id=461 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:48:45,064 INFO etl.fetch_company_metadata - Updated company id=462 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:48:46,757 INFO etl.fetch_company_metadata - Updated company id=463 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:48:48,442 INFO etl.fetch_company_metadata - Updated company id=464 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:48:50,214 INFO etl.fetch_company_metadata - Updated company id=465 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:48:51,915 INFO etl.fetch_company_metadata - Updated company id=466 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:48:53,627 INFO etl.fetch_company_metadata - Updated company id=467 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:48:55,322 INFO etl.fetch_company_metadata - Updated company id=468 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:48:57,087 INFO etl.fetch_company_metadata - Updated company id=469 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:48:58,751 INFO etl.fetch_company_metadata - Updated company id=470 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:49:00,478 INFO etl.fetch_company_metadata - Updated company id=471 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:49:02,219 INFO etl.fetch_company_metadata - Updated company id=472 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:49:04,010 INFO etl.fetch_company_metadata - Updated company id=473 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:49:05,737 INFO etl.fetch_company_metadata - Updated company id=474 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:49:07,399 INFO etl.fetch_company_metadata - Updated company id=475 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:49:09,178 INFO etl.fetch_company_metadata - Updated company id=476 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:49:11,144 INFO etl.fetch_company_metadata - Updated company id=477 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:49:12,836 INFO etl.fetch_company_metadata - Updated company id=478 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:49:14,659 INFO etl.fetch_company_metadata - Updated company id=479 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:49:16,325 INFO etl.fetch_company_metadata - Updated company id=480 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:49:18,310 INFO etl.fetch_company_metadata - Updated company id=481 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:49:19,980 INFO etl.fetch_company_metadata - Updated company id=482 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:49:21,645 INFO etl.fetch_company_metadata - Updated company id=483 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:49:23,301 INFO etl.fetch_company_metadata - Updated company id=484 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:49:24,960 INFO etl.fetch_company_metadata - Updated company id=485 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:49:26,830 INFO etl.fetch_company_metadata - Updated company id=486 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:49:28,510 INFO etl.fetch_company_metadata - Updated company id=487 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:49:30,182 INFO etl.fetch_company_metadata - Updated company id=488 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:49:31,857 INFO etl.fetch_company_metadata - Updated company id=489 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:49:33,603 INFO etl.fetch_company_metadata - Updated company id=490 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:49:35,419 INFO etl.fetch_company_metadata - Updated company id=491 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:49:37,081 INFO etl.fetch_company_metadata - Updated company id=492 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:49:38,798 INFO etl.fetch_company_metadata - Updated company id=493 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:49:40,460 INFO etl.fetch_company_metadata - Updated company id=494 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:49:42,283 INFO etl.fetch_company_metadata - Updated company id=495 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:49:44,025 INFO etl.fetch_company_metadata - Updated company id=496 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:49:45,693 INFO etl.fetch_company_metadata - Updated company id=497 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:49:48,485 INFO etl.fetch_company_metadata - Updated company id=498 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:49:50,197 INFO etl.fetch_company_metadata - Updated company id=499 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:49:51,968 INFO etl.fetch_company_metadata - Updated company id=500 with fields: ['name', 'sector', 'industry']
+2025-11-21 17:49:52,477 INFO etl.fetch_company_metadata - Metadata ETL complete: processed 500 symbols
